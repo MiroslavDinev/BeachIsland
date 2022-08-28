@@ -1,0 +1,32 @@
+<h2>Login Form</h2>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <div class="container">
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" formControlName="username">
+
+    <ng-container *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid">
+        <p *ngIf="loginForm.controls['username'].errors?.['required']" class="error">
+            Username is required!
+        </p>
+        <p *ngIf="loginForm.controls['username'].errors?.['minlength']" class="error">
+            Username must be at least 4 characters!
+        </p>
+    </ng-container>
+
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" formControlName="password">
+
+    <ng-container *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+        <p *ngIf="loginForm.controls['password'].errors?.['required']" class="error">
+            Password is required!
+        </p>
+        <p *ngIf="loginForm.controls['password'].errors?.['minlength']" class="error">
+            Password must be at least 6 characters!
+        </p>
+    </ng-container>
+        
+    <button [disabled]="loginForm.invalid">Login</button>
+    
+  </div>
+</form>
