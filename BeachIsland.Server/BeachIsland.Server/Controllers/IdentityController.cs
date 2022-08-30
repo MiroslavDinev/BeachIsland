@@ -1,27 +1,26 @@
 ﻿namespace BeachIsland.Server.Controllers
 {
-    using System.IdentityModel.Tokens.Jwt;
-    using System.Security.Claims;
-    using System.Text;
     using BeachIsland.Server.Data.Models;
     using BeachIsland.Server.Models.Identity;
+    using BeachIsland.Server.Services.Interfaces;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
-    using Microsoft.IdentityModel.Tokens;
 
     public class IdentityController : ApiController
     {
         private readonly UserManager<User> userManager;
+        private readonly IIdentityService identityService;
         private readonly AppSettings appSettings;
 
-        public IdentityController(UserManager<User> userManager, IOptions<AppSettings> appSettings)
+        public IdentityController(UserManager<User> userManager, IOptions<AppSettings> appSettings, IIdentityService identityService)
         {
             this.userManager = userManager;
+            this.identityService = identityService;
             this.appSettings = appSettings.Value;
         }
 
-        [Route(nameof(Register))]
+        [HttpPost(nameof(Register))]
         public async Task<ActionResult> Register(RegisterUserRequestModel model)
         {
             var user = new User
@@ -40,8 +39,8 @@
             return BadRequest(result.Errors);
         }
 
-        [Route(nameof(Login))]
-        public async Task<ActionResult<string>> Login(LoginUserRequestModel model)
+        [HttpPost(nameof(Login))]
+        public async Task<ActionResult<LoginResponseModel>> Login(LoginUserRequestModel model)
         {
             var user = await this.userManager.FindByNameAsync(model.Username);
 
@@ -57,22 +56,12 @@
                 return Unauthorized();
             }
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(this.appSettings.Secret);
+            var encryptedToken = this.identityService.GenerateJwtToken(user.Id, user.UserName, this.appSettings.Secret);
 
-            var tokenDescriptor = new SecurityTokenDescriptor
+            return new LoginResponseModel
             {
-                Subject = new ClaimsIdentity(new[] 
-                { 
-                    new Claim(ClaimTypes.Name, user.Id.ToString()) 
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                Token = encryptedToken
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var encryptedToken = tokenHandler.WriteToken(token);
-
-            return encryptedToken;
         }
     }
 }
