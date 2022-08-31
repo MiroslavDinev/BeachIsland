@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IUserLogin } from '../core/interfaces/IUserLogin';
-import { IUserRegister } from '../core/interfaces/IUserRegister';
+import { IAuthenticatedResponse } from '../core/interfaces/IAuthenticatedResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +14,19 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login$(data: IUserLogin) :Observable<IUserLogin>{
-    return this.http.post<IUserLogin>(this.loginPath, data);
+  login$(data: IAuthenticatedResponse) :Observable<IAuthenticatedResponse>{
+    return this.http.post<IAuthenticatedResponse>(this.loginPath, data);
   }
 
-  register$(data: IUserRegister): Observable<IUserRegister>{
-    return this.http.post<IUserRegister>(this.registerPath, data);
+  register$(data: any): Observable<any>{
+    return this.http.post(this.registerPath, data);
+  }
+
+  saveToken(response: IAuthenticatedResponse){
+    localStorage.setItem('token', response.token);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 }

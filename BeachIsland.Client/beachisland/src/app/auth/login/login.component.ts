@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,7 @@ loginForm: FormGroup = this.formBuilder.group({
 
   login() :void{
     this.authService.login$(this.loginForm.value).subscribe(data =>{
-      console.log(data)
+      this.authService.saveToken(data);
     })
   }
 }
