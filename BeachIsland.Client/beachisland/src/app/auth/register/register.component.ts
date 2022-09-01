@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -16,14 +17,14 @@ export class RegisterComponent implements OnInit {
     // pswRepeat: new FormControl('',[Validators.required])
   })
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   register(): void{
     this.authService.register$(this.registerForm.value).subscribe(data => {
-      console.log(data)
+      this.router.navigate(['login']);
     })
   }
 }

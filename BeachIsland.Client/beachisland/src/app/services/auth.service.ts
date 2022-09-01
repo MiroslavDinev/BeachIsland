@@ -29,4 +29,16 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token');
   }
+
+  logout() :void{
+    localStorage.removeItem('token');
+  }
+
+  isAuthenticated() :boolean{
+    if(this.getToken()){
+      return true;
+    }
+
+    return false;
+  }
 }
