@@ -1,0 +1,39 @@
+<h2>Profile Information</h2>
+
+<form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+    <div class="container">
+        <ng-container *ngIf="!!userProfile">
+            <p>{{userProfile.username}}</p>
+            <p>{{userProfile.email}}</p>
+        </ng-container>
+    
+
+    <label for="nickname"><b>Nickname</b></label>
+    <input type="text" placeholder="Enter Nickname" name="nickname" formControlName="nickname">
+
+    <ng-container *ngIf="profileForm.controls['nickname'].touched && profileForm.controls['nickname'].invalid">
+        <p *ngIf="profileForm.controls['nickname'].errors?.['minlength']" class="error">
+            Nickname must be at least 2 characters!
+        </p>
+        <p *ngIf="profileForm.controls['nickname'].errors?.['maxlength']" class="error">
+            Nickname must be less than 30 characters!
+        </p>
+    </ng-container>
+
+    <label for="occupationalField"><b>Occupational Field</b></label>
+    <input type="text" placeholder="Enter Occupational Field" name="occupationalField" formControlName="occupationalField">
+
+    <ng-container *ngIf="profileForm.controls['occupationalField'].touched && profileForm.controls['occupationalField'].invalid">
+        <p *ngIf="profileForm.controls['occupationalField'].errors?.['minlength']" class="error">
+            Occupational Field must be at least 3 characters!
+        </p>
+        <p *ngIf="profileForm.controls['occupationalField'].errors?.['maxlength']" class="error">
+            Occupational Field must be less than 30 characters!
+        </p>
+    </ng-container>
+
+    <button type="button" (click)="cancelChanges()">Cancel</button>
+    <button [disabled]="profileForm.invalid">Submit</button>
+
+    </div>
+</form>

@@ -3,11 +3,19 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
+    using BeachIsland.Server.Data;
+    using BeachIsland.Server.Models.Identity;
     using BeachIsland.Server.Services.Interfaces;
     using Microsoft.IdentityModel.Tokens;
 
     public class IdentityService : IIdentityService
     {
+        private readonly BeachIslandDbContext data;
+
+        public IdentityService(BeachIslandDbContext data)
+        {
+            this.data = data;
+        }
         public string GenerateJwtToken(string userId, string username, string secret)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -27,6 +35,37 @@
             var encryptedToken = tokenHandler.WriteToken(token);
 
             return encryptedToken;
+        }
+
+        public ProfileResponseDto GetProfile(string userId)
+        {
+            var profileInfo = this.data.Users
+                .Where(x => x.Id == userId)
+                .Select(x => new ProfileResponseDto
+                {
+                    Username = x.UserName,
+                    Email = x.Email
+                })
+                .FirstOrDefault();
+
+            return profileInfo;
+        }
+
+        public async Task<bool> UpdateProfile(ProfileUpdateRequestDto profileUpdateRequestDto, string userId)
+        {
+            var user = this.data.Users
+                .Where(x => x.Id == userId)
+                .FirstOrDefault();
+
+            if(user != null)
+            {
+                user.Nickname = profileUpdateRequestDto.Nickname;
+                user.OccupationalField = profileUpdateRequestDto.OccupationalField;
+                await this.data.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
         }
     }
 }

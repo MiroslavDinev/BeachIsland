@@ -1,6 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+
 using BeachIsland.Server.Data;
 using BeachIsland.Server.Infrastructure;
-using Microsoft.EntityFrameworkCore;
 
 var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 

@@ -1,9 +1,9 @@
-<h2>Register Form</h2>
+<h2>Registration Form</h2>
 
 <form [formGroup]="registerForm" (ngSubmit)="register()">
   <div class="container">
     <label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" formControlName="username" formControlName="username">
+    <input type="text" placeholder="Enter Username" name="username" formControlName="username">
 
     <ng-container *ngIf="registerForm.controls['username'].touched && registerForm.controls['username'].invalid">
         <p *ngIf="registerForm.controls['username'].errors?.['required']" class="error">
@@ -23,21 +23,30 @@
         </p>
     </ng-container>
 
-    <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" formControlName="password" formControlName="password">
+    
 
-    <ng-container *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].invalid">
-        <p *ngIf="registerForm.controls['password'].errors?.['required']" class="error">
-            Password is required!
-        </p>
-        <p *ngIf="registerForm.controls['password'].errors?.['minlength']" class="error">
-            Password must be at least 6 characters!
-        </p>
-    </ng-container>
+    <div formGroupName="passwords">
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" formControlName="password" formControlName="password">
 
-    <!-- <label for="pswRepeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="pswRepeat" id="pswRepeat" formControlName="pswRepeat"> -->
-        
+        <ng-container *ngIf="shouldShowErrorForControl('password', passwordsGroup)">
+            <p *ngIf="passwordsGroup.controls['password'].errors?.['required']" class="error">
+                Password is required!
+            </p>
+            <p *ngIf="passwordsGroup.controls['password'].errors?.['minlength']" class="error">
+                Password must be at least 6 characters!
+            </p>
+        </ng-container>
+
+        <label for="rePassword"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Repeat Password" name="rePassword" id="rePassword" formControlName="rePassword">
+
+        <ng-container *ngIf="shouldShowErrorForControl('rePassword', passwordsGroup)">
+            <p *ngIf="passwordsGroup.controls['rePassword'].errors?.['passwordMissmatch']" class="error">Repeat Password does not match password!</p>
+        </ng-container>
+
+    </div>
+       
     <button [disabled]="registerForm.invalid">Register</button>
     
   </div>

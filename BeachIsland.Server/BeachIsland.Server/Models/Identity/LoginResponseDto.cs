@@ -1,6 +1,6 @@
 ﻿namespace BeachIsland.Server.Models.Identity
 {
-    public class LoginResponseModel
+    public class LoginResponseDto
     {
         public string Token { get; set; }
     }

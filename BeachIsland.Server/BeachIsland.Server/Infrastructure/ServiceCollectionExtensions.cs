@@ -56,7 +56,8 @@
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services
-                .AddTransient<IIdentityService, IdentityService>();
+                .AddTransient<IIdentityService, IdentityService>()
+                .AddTransient<IPartnerService, PartnerService>();
 
             return services;
         }

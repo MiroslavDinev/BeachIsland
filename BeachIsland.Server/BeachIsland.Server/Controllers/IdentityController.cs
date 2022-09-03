@@ -1,11 +1,15 @@
 ﻿namespace BeachIsland.Server.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.Options;
+    using Microsoft.AspNetCore.Authorization;
+
     using BeachIsland.Server.Data.Models;
     using BeachIsland.Server.Models.Identity;
     using BeachIsland.Server.Services.Interfaces;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Options;
+    using BeachIsland.Server.Infrastructure;
+    using System;
 
     public class IdentityController : ApiController
     {
@@ -21,7 +25,7 @@
         }
 
         [HttpPost(nameof(Register))]
-        public async Task<ActionResult> Register(RegisterUserRequestModel model)
+        public async Task<ActionResult> Register(RegisterUserRequestDto model)
         {
             var user = new User
             {
@@ -40,7 +44,7 @@
         }
 
         [HttpPost(nameof(Login))]
-        public async Task<ActionResult<LoginResponseModel>> Login(LoginUserRequestModel model)
+        public async Task<ActionResult<LoginResponseDto>> Login(LoginUserRequestDto model)
         {
             var user = await this.userManager.FindByNameAsync(model.Username);
 
@@ -58,10 +62,37 @@
 
             var encryptedToken = this.identityService.GenerateJwtToken(user.Id, user.UserName, this.appSettings.Secret);
 
-            return new LoginResponseModel
+            return new LoginResponseDto
             {
                 Token = encryptedToken
             };
+        }
+
+        [Authorize]
+        [HttpGet(nameof(GetProfile))]
+        public ProfileResponseDto GetProfile()
+        {
+            var userId = this.User.GetId();
+
+            var profileInfo = this.identityService.GetProfile(userId);
+
+            return profileInfo;
+        }
+
+        [Authorize]
+        [HttpPost(nameof(UpdateProfile))]
+        public async Task<ActionResult> UpdateProfile(ProfileUpdateRequestDto profileUpdateRequestDto)
+        {
+            var userId = this.User.GetId();
+
+            var successfullyUpdatedProfile = await this.identityService.UpdateProfile(profileUpdateRequestDto, userId);
+
+            if (!successfullyUpdatedProfile)
+            {
+                return BadRequest("Something went wrong. Please try again later.");
+            }
+
+            return Ok();
         }
     }
 }

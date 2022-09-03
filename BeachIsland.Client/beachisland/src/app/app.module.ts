@@ -19,7 +19,7 @@ import { TokenInterceptor } from './core/token.interceptor';
     BrowserModule,
     HttpClientModule,
     RouterModule,
-    CoreModule,
+    CoreModule.forRoot(),
     AppRoutingModule,
     PagesModule,
     AuthModule
