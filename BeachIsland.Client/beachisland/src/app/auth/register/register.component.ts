@@ -46,8 +46,13 @@ export class RegisterComponent implements OnInit {
       Password : passwords.password
     }
 
-    this.authService.register$(body).subscribe(data => {
-      this.router.navigate(['login']);
+    this.authService.register$(body).subscribe({
+      next: () =>{
+        this.router.navigate(['login']);
+      },
+      error: (err) =>{
+        console.error(err.error[0].description);
+      }
     })
   }
 }

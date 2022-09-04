@@ -1,11 +1,13 @@
-<h2>Registration Form</h2>
+<div class="register">
+    <h2 routerLink="/login" class="nonactive"> log in </h2>
+  
+    <h2 class="active"> register </h2>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">     
+  
+      <input type="text" class="text" name="username" formControlName="username">
+       <span>username</span>
 
-<form [formGroup]="registerForm" (ngSubmit)="register()">
-  <div class="container">
-    <label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" formControlName="username">
-
-    <ng-container *ngIf="registerForm.controls['username'].touched && registerForm.controls['username'].invalid">
+       <ng-container *ngIf="registerForm.controls['username'].touched && registerForm.controls['username'].invalid">
         <p *ngIf="registerForm.controls['username'].errors?.['required']" class="error">
             Username is required!
         </p>
@@ -13,9 +15,13 @@
             Username must be at least 4 characters!
         </p>
     </ng-container>
+  
+      <br>
+      
+      <br>
 
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" formControlName="email">
+    <input type="text" class="text" name="email" id="email" formControlName="email">
+    <span>email</span>
 
     <ng-container *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].invalid">
         <p *ngIf="registerForm.controls['email'].errors?.['required']" class="error">
@@ -23,11 +29,13 @@
         </p>
     </ng-container>
 
-    
+    <br>
 
-    <div formGroupName="passwords">
-        <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" formControlName="password" formControlName="password">
+    <br>
+
+      <div formGroupName="passwords">
+        <input type="password" class="text" name="password" formControlName="password" formControlName="password">
+        <span>password</span>
 
         <ng-container *ngIf="shouldShowErrorForControl('password', passwordsGroup)">
             <p *ngIf="passwordsGroup.controls['password'].errors?.['required']" class="error">
@@ -38,17 +46,26 @@
             </p>
         </ng-container>
 
-        <label for="rePassword"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" name="rePassword" id="rePassword" formControlName="rePassword">
+        <input type="password" class="text" name="rePassword" id="rePassword" formControlName="rePassword">
+        <span> repeat password</span>
 
         <ng-container *ngIf="shouldShowErrorForControl('rePassword', passwordsGroup)">
             <p *ngIf="passwordsGroup.controls['rePassword'].errors?.['passwordMissmatch']" class="error">Repeat Password does not match password!</p>
         </ng-container>
 
     </div>
-       
-    <button [disabled]="registerForm.invalid">Register</button>
-    
-  </div>
-</form>
 
+    <br>
+      
+      <br>
+      
+      <button [disabled]="registerForm.invalid" class="signin">
+        Register
+      </button>
+  
+  
+      <hr>
+  
+    </form>
+  
+  </div>

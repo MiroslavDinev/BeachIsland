@@ -1,11 +1,13 @@
-<h2>Login Form</h2>
+<div class="login">
+    <h2 class="active"> log in </h2>
+  
+    <h2 class="nonactive" routerLink="/register"> register </h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">     
+  
+      <input type="text" class="text" name="username" formControlName="username">
+       <span>username</span>
 
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-  <div class="container">
-    <label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" formControlName="username">
-
-    <ng-container *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid">
+       <ng-container *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid">
         <p *ngIf="loginForm.controls['username'].errors?.['required']" class="error">
             Username is required!
         </p>
@@ -13,11 +15,15 @@
             Username must be at least 4 characters!
         </p>
     </ng-container>
+  
+      <br>
+      
+      <br>
+  
+      <input type="password" class="text" name="password" formControlName="password">
+      <span>password</span>
 
-    <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" formControlName="password">
-
-    <ng-container *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+      <ng-container *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
         <p *ngIf="loginForm.controls['password'].errors?.['required']" class="error">
             Password is required!
         </p>
@@ -25,8 +31,16 @@
             Password must be at least 6 characters!
         </p>
     </ng-container>
-        
-    <button [disabled]="loginForm.invalid">Login</button>
-    
+
+      <br>
+      
+      <button [disabled]="loginForm.invalid" class="signin">
+        Log In
+      </button>
+  
+  
+      <hr>
+  
+    </form>
+  
   </div>
-</form>

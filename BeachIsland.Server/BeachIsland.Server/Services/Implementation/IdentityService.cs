@@ -44,7 +44,9 @@
                 .Select(x => new ProfileResponseDto
                 {
                     Username = x.UserName,
-                    Email = x.Email
+                    Email = x.Email,
+                    Nickname = x.Nickname,
+                    OccupationalField = x.OccupationalField
                 })
                 .FirstOrDefault();
 
@@ -59,8 +61,8 @@
 
             if(user != null)
             {
-                user.Nickname = profileUpdateRequestDto.Nickname;
-                user.OccupationalField = profileUpdateRequestDto.OccupationalField;
+                user.Nickname = string.IsNullOrEmpty(profileUpdateRequestDto.Nickname) ? user.Nickname : profileUpdateRequestDto.Nickname;
+                user.OccupationalField = string.IsNullOrEmpty(profileUpdateRequestDto.OccupationalField) ? user.OccupationalField : profileUpdateRequestDto.OccupationalField;
                 await this.data.SaveChangesAsync();
                 return true;
             }

@@ -11,7 +11,7 @@ import { IUserProfile } from '../interfaces/IUserProfile';
 })
 export class ProfileComponent implements OnInit {
 
-  userProfile!: IUserProfile;
+  userProfile: IUserProfile;
 
   profileForm: FormGroup = this.formBuilder.group({
     nickname: new FormControl('', [Validators.minLength(2), Validators.maxLength(30)]),
