@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IAuthenticatedResponse } from '../core/interfaces/IAuthenticatedResponse';
@@ -12,7 +13,7 @@ export class AuthService {
   private loginPath = environment.apiBaseUrl + 'identity/login';
   private registerPath = environment.apiBaseUrl + 'identity/register';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login$(data: IAuthenticatedResponse) :Observable<IAuthenticatedResponse>{
     return this.http.post<IAuthenticatedResponse>(this.loginPath, data);
@@ -32,6 +33,7 @@ export class AuthService {
 
   logout() :void{
     localStorage.removeItem('token');
+    this.router.navigate(['home']);
   }
 
   isAuthenticated() :boolean{

@@ -10,6 +10,7 @@ import { PagesModule } from './feature/pages/pages.module';
 import { AuthModule } from './auth/auth.module';
 import { RouterModule } from '@angular/router';
 import { TokenInterceptor } from './core/token.interceptor';
+import { HeaderComponent } from './core/header/header.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,10 @@ import { TokenInterceptor } from './core/token.interceptor';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: 
+  [
+    AppComponent,
+    HeaderComponent
+  ]
 })
 export class AppModule { }

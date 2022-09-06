@@ -45,8 +45,8 @@
                 {
                     Username = x.UserName,
                     Email = x.Email,
-                    Nickname = x.Nickname,
-                    OccupationalField = x.OccupationalField
+                    Nickname = x.Nickname == null ? "" : x.Nickname,
+                    OccupationalField = x.OccupationalField == null ? "" : x.OccupationalField
                 })
                 .FirstOrDefault();
 

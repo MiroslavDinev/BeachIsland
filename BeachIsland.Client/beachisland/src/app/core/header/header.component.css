@@ -1,0 +1,39 @@
+.header-content{
+    background-color: aliceblue;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: aliceblue;
+    width: 90%;
+    margin: auto;
+}
+
+.logo{
+    width: 4%;
+}
+
+.logo img{
+    width: 100%;
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+}
+
+nav ul li{
+    list-style: none;
+    background-color: greenyellow;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: black;
+}

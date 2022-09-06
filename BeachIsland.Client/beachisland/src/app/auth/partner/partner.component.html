@@ -1,4 +1,4 @@
-<h2>Become Partner</h2>
+<!-- <h2>Become Partner</h2>
 
 <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
 
@@ -37,4 +37,60 @@
     <button [disabled]="partnerForm.invalid">Login</button>
     
   </div>
-</form>
+</form> -->
+
+
+<div class="partner">
+
+    <h2 class="title">Become Partner</h2>
+
+    <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
+
+    <form [formGroup]="partnerForm" (ngSubmit)="becomePartner()">     
+  
+      <input type="text" class="text" name="name" formControlName="name">
+       <span>name</span>
+
+       <ng-container *ngIf="partnerForm.controls['name'].touched && partnerForm.controls['name'].invalid">
+        <p *ngIf="partnerForm.controls['name'].errors?.['required']" class="error">
+            Name is required!
+        </p>
+        <p *ngIf="partnerForm.controls['name'].errors?.['minlength']" class="error">
+            Name must be at least 2 characters!
+        </p>
+        <p *ngIf="partnerForm.controls['name'].errors?.['maxlength']" class="error">
+            Name must be less than 30 characters!
+        </p>
+    </ng-container>
+  
+      <br>
+      
+      <br>
+  
+      <input type="text" class="text" name="phoneNumber" formControlName="phoneNumber">
+      <span>phone number</span>
+
+      <ng-container *ngIf="partnerForm.controls['phoneNumber'].touched && partnerForm.controls['phoneNumber'].invalid">
+        <p *ngIf="partnerForm.controls['phoneNumber'].errors?.['required']" class="error">
+            Phone Number is required!
+        </p>
+        <p *ngIf="partnerForm.controls['phoneNumber'].errors?.['minlength']" class="error">
+            Phone Number must be at least 6 characters!
+        </p>
+        <p *ngIf="partnerForm.controls['phoneNumber'].errors?.['maxlength']" class="error">
+            Phone Number must be less than 20 characters!
+        </p>
+    </ng-container>
+
+      <br>
+      
+      <button [disabled]="partnerForm.invalid" class="signin">
+        Become partner
+      </button>
+  
+  
+      <hr>
+  
+    </form>
+  
+  </div>

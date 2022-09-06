@@ -1,0 +1,28 @@
+<article class="header-content">
+    <header>
+        <article class="logo">
+            <img src="../../../assets/logo.png" alt="Logo">
+        </article>
+        <nav *ngIf="!isLoggedIn">
+            <ul>
+                <li>
+                    <a routerLink="/login">Login</a>
+                </li>
+                <li>
+                    <a routerLink="/register">Register</a>
+                </li>
+            </ul>
+        </nav>
+        <nav *ngIf="isLoggedIn">
+            <ul>
+                <li>
+                    <a routerLink="/profile">Profile</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" (click)="logoutHandler()">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</article>
+
