@@ -64,7 +64,8 @@
 
             return new LoginResponseDto
             {
-                Token = encryptedToken
+                Token = encryptedToken,
+                Username = user.UserName
             };
         }
 

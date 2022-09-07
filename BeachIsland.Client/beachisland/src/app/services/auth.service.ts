@@ -31,8 +31,17 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  saveUsername(response :IAuthenticatedResponse){
+    localStorage.setItem('username', response.username);
+  }
+
+  getUsername() {
+    return localStorage.getItem('username');
+  }
+
   logout() :void{
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     this.router.navigate(['home']);
   }
 

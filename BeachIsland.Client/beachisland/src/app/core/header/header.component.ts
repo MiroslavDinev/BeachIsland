@@ -8,8 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn: boolean = this.authService.isAuthenticated();
-
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -17,6 +15,14 @@ export class HeaderComponent implements OnInit {
 
   logoutHandler() :void{
     this.authService.logout();
+  }
+
+  loggedIn(){
+    return this.authService.getToken();
+  }
+
+  getUsername(){
+    return this.authService.getUsername();
   }
 
 }

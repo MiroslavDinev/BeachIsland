@@ -23,6 +23,7 @@ loginForm: FormGroup = this.formBuilder.group({
   login() :void{
     this.authService.login$(this.loginForm.value).subscribe(data =>{
       this.authService.saveToken(data);
+      this.authService.saveUsername(data);
       this.router.navigate(['/']);
     })
   }
