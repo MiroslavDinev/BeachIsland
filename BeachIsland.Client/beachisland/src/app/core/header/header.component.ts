@@ -25,4 +25,8 @@ export class HeaderComponent implements OnInit {
     return this.authService.getUsername();
   }
 
+  getPartnerStatus(){
+    return this.authService.getPartnerStatus();
+  }
+
 }

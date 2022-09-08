@@ -1,0 +1,15 @@
+footer{
+    background-color: aliceblue;
+    position:fixed;
+    bottom:0px;
+    width: 100%;
+}
+
+p{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color: blue;
+}

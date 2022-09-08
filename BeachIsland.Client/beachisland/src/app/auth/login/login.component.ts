@@ -24,6 +24,7 @@ loginForm: FormGroup = this.formBuilder.group({
     this.authService.login$(this.loginForm.value).subscribe(data =>{
       this.authService.saveToken(data);
       this.authService.saveUsername(data);
+      this.authService.savePartnerStatus(data);
       this.router.navigate(['/']);
     })
   }

@@ -15,12 +15,14 @@
     {
         private readonly UserManager<User> userManager;
         private readonly IIdentityService identityService;
+        private readonly IPartnerService partnerService;
         private readonly AppSettings appSettings;
 
-        public IdentityController(UserManager<User> userManager, IOptions<AppSettings> appSettings, IIdentityService identityService)
+        public IdentityController(UserManager<User> userManager, IOptions<AppSettings> appSettings, IIdentityService identityService, IPartnerService partnerService)
         {
             this.userManager = userManager;
             this.identityService = identityService;
+            this.partnerService = partnerService;
             this.appSettings = appSettings.Value;
         }
 
@@ -65,7 +67,8 @@
             return new LoginResponseDto
             {
                 Token = encryptedToken,
-                Username = user.UserName
+                Username = user.UserName,
+                IsPartner = this.partnerService.isPartner(user.Id)
             };
         }
 

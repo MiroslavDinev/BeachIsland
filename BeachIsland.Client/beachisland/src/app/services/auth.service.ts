@@ -39,9 +39,18 @@ export class AuthService {
     return localStorage.getItem('username');
   }
 
+  savePartnerStatus(response :IAuthenticatedResponse){
+    localStorage.setItem('isPartner', JSON.stringify(response.isPartner));
+  }
+
+  getPartnerStatus(){
+    return JSON.parse(localStorage.getItem('isPartner')!);
+  }
+
   logout() :void{
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('isPartner');
     this.router.navigate(['home']);
   }
 

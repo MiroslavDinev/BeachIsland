@@ -25,6 +25,7 @@ export class PartnerComponent implements OnInit {
   becomePartner() :void{
     this.userService.becomePartner$(this.partnerForm.value).subscribe({
       next: () =>{
+        localStorage.setItem('isPartner', JSON.stringify(true));
         this.router.navigate(['/']);
       },
       error: (err) =>{
