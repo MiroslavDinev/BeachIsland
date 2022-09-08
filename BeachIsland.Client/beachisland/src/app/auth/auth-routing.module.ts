@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "../core/guards/auth.guard";
 import { LoginComponent } from "./login/login.component";
 import { PartnerComponent } from "./partner/partner.component";
 import { ProfileComponent } from "./profile/profile.component";
@@ -15,11 +16,13 @@ const routes: Routes = [
     },
     {
         path: 'partner',
-        component: PartnerComponent
+        component: PartnerComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
+        canActivate: [AuthGuard]
     }
 ]
 
