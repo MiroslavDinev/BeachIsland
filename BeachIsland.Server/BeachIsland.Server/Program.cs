@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 
 using BeachIsland.Server.Data;
 using BeachIsland.Server.Infrastructure;
+using BeachIsland.Server.Services.Implementation;
+using BeachIsland.Server.Services.Interfaces;
 
 var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<BeachIslandDbContext>(options =>
     .AddIdentity()
     .AddJwtAuthentication(appSettings)
     .AddApplicationServices();
+
+builder.Services.AddScoped<IImageService>(x => new ImageService(builder.Configuration["ImagePath"]));
 
 builder.Services.AddCors(options =>
 {

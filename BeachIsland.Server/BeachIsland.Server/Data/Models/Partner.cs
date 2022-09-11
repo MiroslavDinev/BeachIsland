@@ -2,6 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using BeachIsland.Server.Data.Models.Islands;
+
     using static DataConstants.Partner;
 
     public class Partner
@@ -20,6 +22,7 @@
         public string UserId { get; set; }
 
         public virtual User User { get; set; }
+        public IEnumerable<Island> Islands { get; set; }
 
         public Partner(string name, string phoneNumber, string userId)
         {

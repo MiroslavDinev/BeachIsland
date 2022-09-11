@@ -31,5 +31,15 @@
             return this.data.Partners
                 .Any(x => x.UserId == userId);
         }
+
+        public int PartnerId(string userId)
+        {
+            var partnerId = this.data.Partners
+               .Where(p => p.UserId == userId)
+               .Select(p => p.Id)
+               .FirstOrDefault();
+
+            return partnerId;
+        }
     }
 }

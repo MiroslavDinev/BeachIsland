@@ -57,7 +57,8 @@
         {
             services
                 .AddTransient<IIdentityService, IdentityService>()
-                .AddTransient<IPartnerService, PartnerService>();
+                .AddTransient<IPartnerService, PartnerService>()
+                .AddTransient<IIslandService, IslandService>();
 
             return services;
         }
