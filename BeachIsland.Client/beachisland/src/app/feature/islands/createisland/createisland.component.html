@@ -1,0 +1,104 @@
+<h2>Add Island</h2>
+
+<form [formGroup]="islandForm" (ngSubmit)="createIsland()">
+    <div class="container">
+        <label for="name"><b>Name</b></label>
+        <input type="text" name="name" formControlName="name"/>
+
+        <ng-container *ngIf="islandForm.controls['name'].touched && islandForm.controls['name'].invalid">
+            <p *ngIf="islandForm.controls['name'].errors?.['required']" class="error">
+                Name is required!
+            </p>
+            <p *ngIf="islandForm.controls['name'].errors?.['minlength']" class="error">
+                Name must be at least 2 characters!
+            </p>
+            <p *ngIf="islandForm.controls['name'].errors?.['maxlength']" class="error">
+                Name must be less than 30 characters!
+            </p>
+        </ng-container>
+
+        <label for="location"><b>Location</b></label>
+        <input type="text" name="location" formControlName="location"/>
+
+        <ng-container *ngIf="islandForm.controls['location'].touched && islandForm.controls['location'].invalid">
+            <p *ngIf="islandForm.controls['location'].errors?.['required']" class="error">
+                Location is required!
+            </p>
+            <p *ngIf="islandForm.controls['location'].errors?.['minlength']" class="error">
+                Location must be at least 2 characters!
+            </p>
+            <p *ngIf="islandForm.controls['location'].errors?.['maxlength']" class="error">
+                Location must be less than 50 characters!
+            </p>
+        </ng-container>
+
+        <label for="description"><b>Description</b></label>
+        <textarea name="description" rows="8" formControlName="description"></textarea>
+
+        <ng-container *ngIf="islandForm.controls['description'].touched && islandForm.controls['description'].invalid">
+            <p *ngIf="islandForm.controls['description'].errors?.['required']" class="error">
+                Description is required!
+            </p>
+            <p *ngIf="islandForm.controls['description'].errors?.['minlength']" class="error">
+                Description must be at least 10 characters!
+            </p>
+            <p *ngIf="islandForm.controls['description'].errors?.['maxlength']" class="error">
+                Description must be less than 3000 characters!
+            </p>
+        </ng-container>
+
+        <label for="size"><b>Size</b></label>
+        <input type="number" placeholder="Size in sq. acres" name="size" formControlName="size"/>
+
+        <ng-container *ngIf="islandForm.controls['size'].touched && islandForm.controls['size'].invalid">
+            <p *ngIf="islandForm.controls['size'].errors?.['required']" class="error">
+                Size is required!
+            </p>
+        </ng-container>
+
+        <label for="price"><b>Price</b></label>
+        <input type="number" placeholder="Price in USD" name="price" formControlName="price"/>
+
+        <label for="populationSizeId"><b>Population Size</b></label>
+        <select name="populationSizeId" id="populationSizeId"  formControlName="populationSizeId">
+            <option value="1">Uninhabited</option>
+            <option value="2">Up to 10 persons</option>
+            <option value="3">Between 10 persons and 100 persons</option>
+            <option value="4">Between 100 persons and 1000 persons</option>
+            <option value="5">Between 1000 persons and 10 000 persons</option>
+            <option value="6">Between 10 000 persons and 100 000 persons</option>
+            <option value="7">Between 100 000 persons and 1 000 000 persons</option>
+            <option value="8">Over 1 000 000 persons</option>
+          </select>
+
+          <ng-container *ngIf="islandForm.controls['populationSizeId'].touched && islandForm.controls['populationSizeId'].invalid">
+            <p *ngIf="islandForm.controls['populationSizeId'].errors?.['required']" class="error">
+                Population Size is required!
+            </p>
+        </ng-container>
+
+          <label for="islandRegionId"><b>Island Region</b></label>
+          <select name="islandRegionId" id="islandRegionId"  formControlName="islandRegionId">
+            <option value="1">Africa</option>
+            <option value="2">Asia</option>
+            <option value="3">Canada</option>
+            <option value="4">Carribean</option>
+            <option value="5">Central America</option>
+            <option value="6">Europe</option>
+            <option value="7">South America</option>
+            <option value="8">South Pacific</option>
+            <option value="9">United States</option>
+          </select>
+
+          <ng-container *ngIf="islandForm.controls['islandRegionId'].touched && islandForm.controls['islandRegionId'].invalid">
+            <p *ngIf="islandForm.controls['islandRegionId'].errors?.['required']" class="error">
+                Island Region Size is required!
+            </p>
+        </ng-container>
+
+          <label for="file">Choose File</label><br /> <input type="file" id="file" (change)="uploadFiles($any($event.target).files)">
+
+          <button class="cancel" type="button" (click)="cancelChanges()">Cancel</button>
+          <button [disabled]="islandForm.invalid">Submit</button>
+    </div>
+</form>

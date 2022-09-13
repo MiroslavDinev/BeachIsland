@@ -21,7 +21,7 @@ namespace BeachIsland.Server.Models.Islands
         public string Description { get; set; }
         [Required]
         [Range(double.Epsilon, double.MaxValue, ErrorMessage = "The area should be bigger than 0 km")]
-        public double SizeInSquareKm { get; set; }
+        public double Size { get; set; }
         public decimal? Price { get; set; }
         [Required]
         public string FileType { get; set; }

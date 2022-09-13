@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { TokenInterceptor } from './core/token.interceptor';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
+import { IslandsModule } from './feature/islands/islands.module';
+import { IslandService } from './services/island.service';
 
 @NgModule({
   declarations: [
@@ -24,11 +26,13 @@ import { FooterComponent } from './core/footer/footer.component';
     CoreModule.forRoot(),
     AppRoutingModule,
     PagesModule,
-    AuthModule
+    AuthModule,
+    IslandsModule
   ],
   providers: 
   [
     AuthService,
+    IslandService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

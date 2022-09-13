@@ -34,5 +34,21 @@
                 }
             }
         }
+
+        public byte[] GetImage(int mainEntityImageId, string fileType, ImageCategory imageCategory)
+        {
+            var imagePath = _path + $"\\{imageCategory}";
+
+            byte[] buffer = null;
+
+            var imageName = mainEntityImageId + "." + fileType;
+
+            using (FileStream fs = new FileStream($@"{imagePath}\{imageName}", FileMode.Open, FileAccess.Read))
+            {
+                buffer = new byte[fs.Length];
+                fs.Read(buffer, 0, (int)fs.Length);
+            }
+            return buffer;
+        }
     }
 }

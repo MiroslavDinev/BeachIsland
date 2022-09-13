@@ -61,5 +61,12 @@
 
             return Ok();
         }
+
+        [Authorize]
+        [HttpGet(nameof(All))]
+        public List<IslandListItemDto> All()
+        {
+            return this.islandService.AllIslands();
+        }
     }
 }
