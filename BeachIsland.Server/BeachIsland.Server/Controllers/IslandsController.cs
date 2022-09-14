@@ -64,9 +64,23 @@
 
         [Authorize]
         [HttpGet(nameof(All))]
-        public List<IslandListItemDto> All()
+        public IslandListItemDto[] All()
         {
             return this.islandService.AllIslands();
+        }
+
+        [Authorize]
+        [HttpGet("Details/{id}")]
+        public ActionResult<IslandDetailsDto> Details(int id)
+        {
+            var island = this.islandService.Details(id);
+
+            if(island == null)
+            {
+                return NotFound();
+            }
+
+            return island;
         }
     }
 }

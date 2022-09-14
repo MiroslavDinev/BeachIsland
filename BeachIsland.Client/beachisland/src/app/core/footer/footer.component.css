@@ -1,8 +1,11 @@
 footer{
     background-color: aliceblue;
-    position:fixed;
+    position:sticky;
     bottom:0px;
     width: 100%;
+    margin-bottom: 0px;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 p{

@@ -28,7 +28,7 @@
             return island.Id;
         }
 
-        public List<IslandListItemDto> AllIslands()
+        public IslandListItemDto[] AllIslands()
         {
             var islands = this.data.Islands
                 .Where(x =>x.IsDeleted == false)
@@ -39,7 +39,7 @@
                     Location = x.Location,
                     IsPublic = x.IsPublic,
                     Price = x.Price,
-                    SizeInSquareKm = x.SizeInSquareKm,
+                    Size = x.SizeInSquareKm,
                     FileType = x.FileType
                 })
                 .ToList();
@@ -53,7 +53,38 @@
                 island.ImageUrl = imageBase64String;
             }
 
-            return islands;
+            return islands.ToArray(); ;
+        }
+
+        public IslandDetailsDto Details(int id)
+        {
+            var island = this.data.Islands
+                .Where(x => x.Id == id && x.IsDeleted == false)
+                .Select(x => new IslandDetailsDto
+                {
+                    Description = x.Description,
+                    IslandRegionName = x.IslandRegion.Name,
+                    PopulationSizeName = x.PopulationSize.Name,
+                    Location = x.Location,
+                    Name = x.Name,
+                    Price = x.Price,
+                    Size = x.SizeInSquareKm,
+                    FileType = x.FileType
+                })
+                .FirstOrDefault();
+
+            if(island != null)
+            {
+                var bytes = this.imageService.GetImage(id, island.FileType, ImageCategory.Islands);
+
+                var imageBase64String = Convert.ToBase64String(bytes);
+
+                island.ImageUrl = imageBase64String;
+
+                return island;
+            }
+
+            return null;
         }
     }
 }

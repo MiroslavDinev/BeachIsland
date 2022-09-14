@@ -1,0 +1,43 @@
+.container{
+    width: 90%;
+    margin: auto;
+    margin-top: 5em;
+}
+
+.islands{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.island{
+    width: 30%;
+    background-color: #F4F8FE;
+    margin-bottom: 2em;
+}
+
+.island-img{
+    width: 100%;
+}
+
+.island-img img{
+    width: 100%;
+    height: 300px;
+}
+
+.island-text h2{
+    text-align: center;
+}
+
+.island-text-details{
+    display: flex;
+    justify-content: space-between;
+}
+
+.details{
+    text-decoration: none;
+    color: black;
+    background-color: coral;
+    padding: 10px;
+    border: 1px solid coral;
+}
