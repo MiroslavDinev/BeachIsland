@@ -35,9 +35,15 @@ export class CreateislandComponent implements OnInit {
 
   createIsland() {
     this.formData.append('details', JSON.stringify(this.islandForm.value));
-    this.islandService.createIsland(this.formData).subscribe(res =>{
-      this.router.navigate(['/']);
-    })
+    this.islandService.createIsland$(this.formData).subscribe({
+      next: () =>{
+        this.router.navigate(['islands']);
+      },
+      error: (err) =>{
+        console.log(err);
+      }
+    }
+    )
   }
 
   cancelChanges(){

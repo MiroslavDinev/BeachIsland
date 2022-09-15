@@ -11,6 +11,7 @@
                     <p>{{island.size}} ACRES</p>
                 </article>                
                 <p *ngIf="island.price"> Price: ${{island.price}}</p>
+                <p *ngIf="!island.price"> Price upon request</p>
             </article>
             <article class="buttons">
                 <a class="details" routerLink="/islands/{{island.id}}">More Details</a>

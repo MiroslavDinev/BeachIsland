@@ -47,7 +47,7 @@
                 throw new ImageSizeExceedException();
             }
 
-            var island = JsonConvert.DeserializeObject<AddIslandDto>(details);
+            var island = JsonConvert.DeserializeObject<IslandAddDto>(details);
 
             var fileBytes = file.GetByteFromFileStream();
 
@@ -81,6 +81,52 @@
             }
 
             return island;
+        }
+
+        [Authorize]
+        [HttpPut("Update/{id}")]
+        public async Task<ActionResult> Update([FromForm] IFormFile file, [FromForm] string details)
+        {
+            var partnerId = this.partnerService.PartnerId(this.User.GetId());
+
+            if (partnerId == 0)
+            {
+                return Unauthorized();
+            }
+
+            bool isValidImage = ImageExtensionHelper.IsValidImageFile(file);
+            bool isValidSize = ImageExtensionHelper.ValidateImageSize(file);
+
+            if (!isValidImage)
+            {
+                throw new ImageNotSupportedFormatException();
+            }
+
+            if (!isValidSize)
+            {
+                throw new ImageSizeExceedException();
+            }
+
+            var island = JsonConvert.DeserializeObject<IslandEditDto>(details);
+
+            var fileBytes = file.GetByteFromFileStream();
+
+            var fileType = GetFileTypeExtension.GetFileType(file);
+
+            island.FileType = fileType;
+
+            var updated = await this.islandService.Update(island, partnerId);
+
+            if (!updated)
+            {
+                return BadRequest();
+            }
+
+            this.imageService.DeleteImages(island.Id, ImageCategory.Islands);
+
+            this.imageService.AddImage(fileBytes, fileType, island.Id, ImageCategory.Islands);
+
+            return Ok();
         }
     }
 }

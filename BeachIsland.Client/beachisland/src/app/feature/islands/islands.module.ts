@@ -4,13 +4,15 @@ import { CreateislandComponent } from './createisland/createisland.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IslandsRoutingModule } from './islands-routing.module';
 import { ListIslandsComponent } from './list-islands/list-islands.component';
+import { IslandDetailsComponent } from './island-details/island-details.component';
 
 
 
 @NgModule({
   declarations: [
     CreateislandComponent,
-    ListIslandsComponent
+    ListIslandsComponent,
+    IslandDetailsComponent
   ],
   imports: [
     CommonModule,

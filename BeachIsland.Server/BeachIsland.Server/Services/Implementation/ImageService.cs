@@ -50,5 +50,16 @@
             }
             return buffer;
         }
+
+        public void DeleteImages(int mainEntityImageId, ImageCategory imageCategory)
+        {
+            var imagePath = _path + $"\\{imageCategory}";
+
+            var productImages = Directory.GetFiles(imagePath, $"{mainEntityImageId}.*");
+            foreach (var productImage in productImages)
+            {
+                File.Delete(productImage);
+            }
+        }
     }
 }

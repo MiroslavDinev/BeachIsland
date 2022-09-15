@@ -1,0 +1,22 @@
+.container{
+    width: 90%;
+    margin:auto;
+    background-color: #F4F8FE;
+    margin-top: 5em;
+}
+
+.island{
+    display: flex;
+}
+
+.island-img{
+    width: 50%;
+}
+
+.island-img img{
+    width: 100%;
+}
+
+.island-data{
+    width: 50%;
+}

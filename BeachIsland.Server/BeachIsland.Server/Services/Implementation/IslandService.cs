@@ -6,6 +6,7 @@
     using BeachIsland.Server.Enums;
     using BeachIsland.Server.Models.Islands;
     using BeachIsland.Server.Services.Interfaces;
+    using Microsoft.EntityFrameworkCore;
 
     public class IslandService : IIslandService
     {
@@ -17,7 +18,7 @@
             this.data = data;
             this.imageService = imageService;
         }
-        public async Task<int> AddAsync(AddIslandDto addIslandDto, int partnerId)
+        public async Task<int> AddAsync(IslandAddDto addIslandDto, int partnerId)
         {
             var island = new Island(addIslandDto.Name, addIslandDto.Location, addIslandDto.Description, addIslandDto.Size, addIslandDto.Price, addIslandDto.FileType, addIslandDto.PopulationSizeId, addIslandDto.IslandRegionId, partnerId);
 
@@ -62,6 +63,7 @@
                 .Where(x => x.Id == id && x.IsDeleted == false)
                 .Select(x => new IslandDetailsDto
                 {
+                    Id = x.Id,
                     Description = x.Description,
                     IslandRegionName = x.IslandRegion.Name,
                     PopulationSizeName = x.PopulationSize.Name,
@@ -85,6 +87,31 @@
             }
 
             return null;
+        }
+
+        public async Task<bool> Update(IslandEditDto islandEditDto, int partnerId)
+        {
+            var island = await this.data.Islands
+                .Where(x => x.Id == islandEditDto.Id && x.PartnerId == partnerId)
+                .FirstOrDefaultAsync();
+
+            if(island == null)
+            {
+                return false;
+            }
+
+            island.Name = islandEditDto.Name;
+            island.Location = islandEditDto.Location;
+            island.Description = islandEditDto.Description;
+            island.Price = islandEditDto.Price;
+            island.SizeInSquareKm = islandEditDto.Size;
+            island.FileType = islandEditDto.FileType;
+            island.IslandRegionId = islandEditDto.IslandRegionId;
+            island.PopulationSizeId = islandEditDto.PopulationSizeId;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
         }
     }
 }

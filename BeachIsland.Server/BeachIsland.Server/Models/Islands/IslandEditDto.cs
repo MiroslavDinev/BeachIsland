@@ -6,8 +6,10 @@ namespace BeachIsland.Server.Models.Islands
 
     using static DataConstants.Island;
 
-    public class AddIslandDto
+    public class IslandEditDto
     {
+        public int Id { get; set; }
+
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = "The island name should be between {2} and {1} characters")]
         public string Name { get; set; }

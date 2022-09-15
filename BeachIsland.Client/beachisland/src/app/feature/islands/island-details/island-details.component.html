@@ -1,0 +1,17 @@
+<article class="container">
+    <article class="island" *ngIf="island">
+        <article class="island-img">
+            <img src="{{'data:image/*;base64,' + island.imageUrl}}" alt="{{island.name}}">
+        </article>
+        <article class="island-data">
+            <h2>{{island.name}}</h2>
+            <p>Location: {{island.location}}</p>
+            <p>Description: {{island.description}}</p>
+            <p>Size: {{island.size}}</p>
+            <p *ngIf="island.price">Price: {{island.price}}</p>
+            <p *ngIf="!island.price">Price upon request</p>
+            <p>Region: {{island.islandRegionName}}</p>
+            <p>Population: {{island.populationSizeName}}</p>
+        </article>
+    </article>
+</article>

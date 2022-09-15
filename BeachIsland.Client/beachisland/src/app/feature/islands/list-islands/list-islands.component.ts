@@ -13,9 +13,8 @@ export class ListIslandsComponent implements OnInit {
   constructor(private islandService: IslandService) { }
 
   ngOnInit(): void {
-    this.islandService.getIslands().subscribe(islands =>{
+    this.islandService.getIslands$().subscribe(islands =>{
       this.islands = islands;
-      console.log(this.islands);
     })
   }
 

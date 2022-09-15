@@ -96,7 +96,7 @@
             </p>
         </ng-container>
 
-          <label for="file">Choose File</label><br /> <input type="file" id="file" (change)="uploadFiles($any($event.target).files)">
+          <label for="file">Choose File</label><br /> <input type="file" id="file" required (change)="uploadFiles($any($event.target).files)">
 
           <button class="cancel" type="button" (click)="cancelChanges()">Cancel</button>
           <button [disabled]="islandForm.invalid">Submit</button>

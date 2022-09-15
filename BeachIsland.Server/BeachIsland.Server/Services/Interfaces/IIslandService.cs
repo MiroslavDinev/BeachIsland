@@ -4,8 +4,9 @@
 
     public interface IIslandService
     {
-        Task<int> AddAsync(AddIslandDto addIslandDto, int partnerId);
+        Task<int> AddAsync(IslandAddDto addIslandDto, int partnerId);
         IslandListItemDto[] AllIslands();
         IslandDetailsDto Details(int id);
+        Task<bool> Update(IslandEditDto islandEditDto, int partnerId);
     }
 }
