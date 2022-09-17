@@ -65,7 +65,9 @@
                 {
                     Id = x.Id,
                     Description = x.Description,
+                    IslandRegionId = x.IslandRegionId,
                     IslandRegionName = x.IslandRegion.Name,
+                    PopulationSizeId = x.PopulationSizeId,
                     PopulationSizeName = x.PopulationSize.Name,
                     Location = x.Location,
                     Name = x.Name,
@@ -112,6 +114,32 @@
             await this.data.SaveChangesAsync();
 
             return true;
+        }
+
+        public PopulationSizesDto[] IslandSizes()
+        {
+            var sizes = this.data.PopulationSizes
+                .Select(x => new PopulationSizesDto
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+                .ToArray();
+
+            return sizes;
+        }
+
+        public RegionsDto[] IslandRegions()
+        {
+            var regions = this.data.IslandRegions
+                .Select(x => new RegionsDto
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+                .ToArray();
+
+            return regions;
         }
     }
 }

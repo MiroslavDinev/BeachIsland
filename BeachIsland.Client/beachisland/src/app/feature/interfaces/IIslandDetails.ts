@@ -7,6 +7,8 @@ export interface IIslandDetails{
     price: number,
     imageUrl: string,
     fileType: string,
+    islandRegionId: number,
     islandRegionName: string,
+    populationSizeId: number,
     populationSizeName: string
 }

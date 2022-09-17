@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IslandsRoutingModule } from './islands-routing.module';
 import { ListIslandsComponent } from './list-islands/list-islands.component';
 import { IslandDetailsComponent } from './island-details/island-details.component';
+import { EditIslandComponent } from './edit-island/edit-island.component';
 
 
 
@@ -12,7 +13,8 @@ import { IslandDetailsComponent } from './island-details/island-details.componen
   declarations: [
     CreateislandComponent,
     ListIslandsComponent,
-    IslandDetailsComponent
+    IslandDetailsComponent,
+    EditIslandComponent
   ],
   imports: [
     CommonModule,

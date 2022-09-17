@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IslandService } from 'src/app/services/island.service';
+import { IIslandRegions } from '../../interfaces/IIslandRegions';
+import { IIslandSizes } from '../../interfaces/IIslandSizes';
 
 @Component({
   selector: 'app-createisland',
@@ -11,6 +13,9 @@ import { IslandService } from 'src/app/services/island.service';
 export class CreateislandComponent implements OnInit {
 
   public formData = new FormData();
+
+  islandSizes : IIslandSizes[];
+  islandRegions: IIslandRegions[];
 
   islandForm: FormGroup = this.formBuilder.group({
     name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
@@ -25,6 +30,12 @@ export class CreateislandComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private islandService: IslandService, private router: Router) { }
 
   ngOnInit(): void {
+    this.getRegions();
+    this.getSizes();
+    let defaultSizeId = 1;
+    this.islandForm.controls['populationSizeId'].setValue(defaultSizeId);
+    let defaultRegionId = 1;
+    this.islandForm.controls['islandRegionId'].setValue(defaultRegionId);
   }
 
   uploadFiles(file: any) {
@@ -48,5 +59,17 @@ export class CreateislandComponent implements OnInit {
 
   cancelChanges(){
     this.router.navigate(['/']);
+  }
+
+  getSizes() {
+    this.islandService.getSizes$().subscribe(sizes => {
+      this.islandSizes = sizes;
+    })
+  }
+
+  getRegions() {
+    this.islandService.getRegions$().subscribe(regions => {
+      this.islandRegions = regions;
+    })
   }
 }

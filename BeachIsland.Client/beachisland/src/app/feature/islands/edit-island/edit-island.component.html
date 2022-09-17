@@ -1,7 +1,12 @@
-<h2>Add Island</h2>
+<h2>Edit Island</h2>
 
-<form [formGroup]="islandForm" (ngSubmit)="createIsland()">
-    <div class="container">
+<form [formGroup]="islandForm" (ngSubmit)="editIsland()">
+    <div class="container" *ngIf="island">
+
+        <article class="island-img">
+            <img src="{{'data:image/*;base64,' + island.imageUrl}}" alt="{{island.name}}">
+        </article>
+
         <label for="name"><b>Name</b></label>
         <input type="text" name="name" formControlName="name"/>
 

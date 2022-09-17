@@ -84,7 +84,7 @@
         }
 
         [Authorize]
-        [HttpPut("Update/{id}")]
+        [HttpPut(nameof(Update))]
         public async Task<ActionResult> Update([FromForm] IFormFile file, [FromForm] string details)
         {
             var partnerId = this.partnerService.PartnerId(this.User.GetId());
@@ -127,6 +127,18 @@
             this.imageService.AddImage(fileBytes, fileType, island.Id, ImageCategory.Islands);
 
             return Ok();
+        }
+
+        [HttpGet(nameof(IslandSizes))]
+        public PopulationSizesDto[] IslandSizes()
+        {
+            return this.islandService.IslandSizes();
+        }
+
+        [HttpGet(nameof(IslandRegions))]
+        public RegionsDto[] IslandRegions()
+        {
+            return this.islandService.IslandRegions();
         }
     }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IslandService } from 'src/app/services/island.service';
 import { IIslandItem } from '../../interfaces/IIslandItem';
 
@@ -10,7 +11,7 @@ import { IIslandItem } from '../../interfaces/IIslandItem';
 export class ListIslandsComponent implements OnInit {
 
   islands: IIslandItem[];
-  constructor(private islandService: IslandService) { }
+  constructor(private islandService: IslandService, private router: Router) { }
 
   ngOnInit(): void {
     this.islandService.getIslands$().subscribe(islands =>{
@@ -18,4 +19,7 @@ export class ListIslandsComponent implements OnInit {
     })
   }
 
+  editIsland(id: number){
+    this.router.navigate(["islands/" + id + "/update"]);
+  }
 }
