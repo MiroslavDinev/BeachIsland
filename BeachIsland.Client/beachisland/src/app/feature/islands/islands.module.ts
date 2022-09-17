@@ -6,6 +6,7 @@ import { IslandsRoutingModule } from './islands-routing.module';
 import { ListIslandsComponent } from './list-islands/list-islands.component';
 import { IslandDetailsComponent } from './island-details/island-details.component';
 import { EditIslandComponent } from './edit-island/edit-island.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 
@@ -19,7 +20,8 @@ import { EditIslandComponent } from './edit-island/edit-island.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    IslandsRoutingModule
+    IslandsRoutingModule,
+    SweetAlert2Module.forRoot()
   ]
 })
 export class IslandsModule { }
