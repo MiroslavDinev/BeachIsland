@@ -6,6 +6,7 @@
     using BeachIsland.Server.Enums;
     using BeachIsland.Server.Models.Islands;
     using BeachIsland.Server.Services.Interfaces;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
     public class IslandService : IIslandService
@@ -54,7 +55,7 @@
                 island.ImageUrl = imageBase64String;
             }
 
-            return islands.ToArray(); ;
+            return islands.ToArray();
         }
 
         public IslandDetailsDto Details(int id)
@@ -140,6 +141,23 @@
                 .ToArray();
 
             return regions;
+        }
+
+        public async Task<bool> Delete(int id, int partnerId)
+        {
+            var island = await this.data.Islands
+                .Where(x => x.Id == id && x.PartnerId == partnerId && x.IsDeleted == false)
+                .FirstOrDefaultAsync();
+
+            if(island == null)
+            {
+                return false;
+            }
+
+            island.IsDeleted = true;
+            await this.data.SaveChangesAsync();
+
+            return true;
         }
     }
 }

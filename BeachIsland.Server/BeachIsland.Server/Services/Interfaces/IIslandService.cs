@@ -6,6 +6,7 @@
     {
         Task<int> AddAsync(IslandAddDto addIslandDto, int partnerId);
         IslandListItemDto[] AllIslands();
+        Task<bool> Delete(int id, int partnerId);
         IslandDetailsDto Details(int id);
         RegionsDto[] IslandRegions();
         PopulationSizesDto[] IslandSizes();

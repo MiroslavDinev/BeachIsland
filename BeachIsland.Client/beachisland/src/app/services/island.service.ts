@@ -18,6 +18,7 @@ export class IslandService {
   private editIslandPath = environment.apiBaseUrl + 'islands/update';
   private getIslandSizesPath = environment.apiBaseUrl + 'islands/islandsizes';
   private getIslandRegionsPath = environment.apiBaseUrl + 'islands/islandregions';
+  private deleteIslandPath = environment.apiBaseUrl + 'islands/delete'
 
   constructor(private http: HttpClient) { }
 
@@ -43,5 +44,9 @@ export class IslandService {
 
   getRegions$() :Observable<IIslandRegions[]>{
     return this.http.get<IIslandRegions[]>(this.getIslandRegionsPath);
+  }
+
+  deleteIsland$(id: any) {
+    return this.http.delete(this.deleteIslandPath + '/' + id);
   }
 }

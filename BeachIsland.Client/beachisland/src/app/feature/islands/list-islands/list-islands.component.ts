@@ -14,6 +14,10 @@ export class ListIslandsComponent implements OnInit {
   constructor(private islandService: IslandService, private router: Router) { }
 
   ngOnInit(): void {
+    this.fetchIslands();
+  }
+
+  fetchIslands(){
     this.islandService.getIslands$().subscribe(islands =>{
       this.islands = islands;
     })
@@ -21,5 +25,11 @@ export class ListIslandsComponent implements OnInit {
 
   editIsland(id: number){
     this.router.navigate(["islands/" + id + "/update"]);
+  }
+
+  deleteIsland(id: number){
+    this.islandService.deleteIsland$(id).subscribe(res => {
+      this.fetchIslands();
+    })
   }
 }

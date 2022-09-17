@@ -62,14 +62,12 @@
             return Ok();
         }
 
-        [Authorize]
         [HttpGet(nameof(All))]
         public IslandListItemDto[] All()
         {
             return this.islandService.AllIslands();
         }
 
-        [Authorize]
         [HttpGet("Details/{id}")]
         public ActionResult<IslandDetailsDto> Details(int id)
         {
@@ -139,6 +137,27 @@
         public RegionsDto[] IslandRegions()
         {
             return this.islandService.IslandRegions();
+        }
+
+        [Authorize]
+        [HttpDelete("Delete/{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var partnerId = this.partnerService.PartnerId(this.User.GetId());
+
+            if (partnerId == 0)
+            {
+                return Unauthorized();
+            }
+
+            var deleted = await this.islandService.Delete(id, partnerId);
+
+            if (!deleted)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
         }
     }
 }
