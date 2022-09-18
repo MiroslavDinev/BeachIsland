@@ -1,27 +1,42 @@
 <article class="header-content">
     <header>
-        <article class="logo">
-            <a routerLink="/home"><img src="../../../assets/logo.png" alt="Logo"></a>
-        </article>
+        <article class="left-part">
+            <article class="logo">
+                <a routerLink="/home"><img src="../../../assets/logo.png" alt="Logo"></a>
+            </article>
+            <div class="dropdown">
+                <button class="dropbtn"> 
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="dropdown-content">
+                  <a routerLink="/islands">Islands</a>
+                </div>
+              </div> 
+        </article>        
         <nav *ngIf="!loggedIn()">
             <ul>
-                <li>
+                <li class="button-effect">
+                    <div id="circle"></div>
                     <a routerLink="/login">Login</a>
                 </li>
-                <li>
+                <li class="button-effect">
+                    <div id="circle"></div>
                     <a routerLink="/register">Register</a>
                 </li>
             </ul>
         </nav>
         <nav *ngIf="loggedIn()">
             <ul>
-                <li *ngIf="!getPartnerStatus()">
+                <li class="button-effect" *ngIf="!getPartnerStatus()">
+                    <div id="circle"></div>
                     <a routerLink="/partner">Become partner</a>
                 </li>
-                <li>
+                <li class="button-effect">
+                    <div id="circle"></div>
                     <a routerLink="/profile">{{getUsername()}}</a>
                 </li>
-                <li>
+                <li class="button-effect">
+                    <div id="circle"></div>
                     <a href="javascript:void(0);" (click)="logoutHandler()">Logout</a>
                 </li>
             </ul>

@@ -1,3 +1,5 @@
+@import url("https://use.fontawesome.com/releases/v5.6.3/css/all.css");
+
 .header-content{
     background-color: aliceblue;
 }
@@ -11,8 +13,15 @@ header{
     margin: auto;
 }
 
+.left-part{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 9%;
+  }
+
 .logo{
-    width: 4%;
+    width: 50%;
 }
 
 .logo img{
@@ -37,3 +46,80 @@ nav ul li a{
     text-decoration: none;
     color: black;
 }
+
+.button-effect{
+    position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button-effect a {
+    position: relative;
+    transition: all .45s ease-Out;
+  }
+
+  #circle {
+    width: 0%;
+    height: 0%;
+    opacity: 0;
+    line-height: 40px;
+    border-radius: 50%;
+    background: #BFC0C0;
+    position: absolute;
+    transition: all .5s ease-Out;
+    top: 20px;
+    left: 70px;
+  }
+
+  .button-effect:hover #circle {
+    width: 200%;
+    height: 500%;
+    opacity: 1;
+    top: -70px;
+    left: -70px;
+  }
+  
+  .dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: grey;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .fas.fa-bars{
+    font-size: 22px;
+  }
