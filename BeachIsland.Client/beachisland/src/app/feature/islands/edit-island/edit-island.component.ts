@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map, mergeMap } from 'rxjs';
 import { IslandService } from 'src/app/services/island.service';
 import { IIslandDetails } from '../../interfaces/IIslandDetails';
 import { IIslandRegions } from '../../interfaces/IIslandRegions';
@@ -37,10 +38,15 @@ export class EditIslandComponent implements OnInit {
   ngOnInit(): void {
     this.getRegions();
     this.getSizes();
-    this.route.params.subscribe(params =>{
-      this.id = params['id'];
-      this.islandService.getIslandDetails$(this.id).subscribe(res =>{
-        this.island = res;
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.route.params.pipe(map(params =>{
+      const id = params['id'];
+      return id
+    }), mergeMap(id => this.islandService.getIslandDetails$(id))).subscribe(res => {
+      this.island = res;
         this.islandForm = this.formBuilder.group({
           'id' : [this.island.id],
           name: [this.island.name],
@@ -50,9 +56,8 @@ export class EditIslandComponent implements OnInit {
           price : [this.island.price],
           populationSizeId: [this.island.populationSizeId],
           islandRegionId: [this.island.islandRegionId]
-        })
-      })
     })
+  })
   }
 
   uploadFiles(file: any) {

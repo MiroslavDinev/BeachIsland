@@ -16,7 +16,6 @@
             <article class="buttons">
                 <a class="details" routerLink="/islands/{{island.id}}">More Details</a>
                 <button class="edit" (click)="editIsland(island.id)">Edit</button>
-                <!-- <button class="delete" (click)="deleteIsland(island.id)">Delete</button> -->
                 <button class="delete" [swal]="{title: 'Are you sure?', text: 'You will not be able to revert this!', icon: 'warning',confirmButtonColor: '#d33' ,showCancelButton: true}" (confirm)="deleteIsland(island.id)" (dismiss)="cancelChanges()">
                     Delete
                 </button>
