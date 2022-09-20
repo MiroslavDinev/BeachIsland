@@ -8,6 +8,8 @@
     using BeachIsland.Server.Services.Interfaces;
     using Microsoft.IdentityModel.Tokens;
 
+    using static WebConstants;
+
     public class IdentityService : IIdentityService
     {
         private readonly BeachIslandDbContext data;
@@ -16,7 +18,7 @@
         {
             this.data = data;
         }
-        public string GenerateJwtToken(string userId, string username, string secret)
+        public string GenerateJwtToken(string userId, string username, string secret, bool isAdmin)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secret);
@@ -26,7 +28,8 @@
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, userId),
-                    new Claim(ClaimTypes.Name, username)
+                    new Claim(ClaimTypes.Name, username),
+                    isAdmin ? new Claim(ClaimTypes.Role, AdministratorRoleName) : null
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

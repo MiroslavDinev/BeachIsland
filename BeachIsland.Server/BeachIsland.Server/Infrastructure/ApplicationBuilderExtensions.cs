@@ -1,8 +1,11 @@
 ﻿namespace BeachIsland.Server.Infrastructure
 {
     using BeachIsland.Server.Data;
+    using BeachIsland.Server.Data.Models;
     using BeachIsland.Server.Data.Models.Islands;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using static WebConstants;
 
     public static class ApplicationBuilderExtensions
     {
@@ -16,6 +19,7 @@
 
             SeedPopulationSize(dbContext);
             SeedRegions(dbContext);
+            SeedAdministrator(services.ServiceProvider);
         }
 
         private static void SeedRegions(BeachIslandDbContext dbContext)
@@ -61,6 +65,39 @@
             });
 
             dbContext.SaveChanges();
+        }
+
+        private static void SeedAdministrator(IServiceProvider services)
+        {
+            var userManager = services.GetRequiredService<UserManager<User>>();
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+            Task.Run(async () =>
+            {
+                if (await roleManager.RoleExistsAsync(AdministratorRoleName))
+                {
+                    return;
+                }
+
+                var role = new IdentityRole { Name = AdministratorRoleName };
+                await roleManager.CreateAsync(role);
+
+                const string adminEmail = "admin.dreamisland@dir.bg";
+                const string adminPassword = "admin123!321!";
+
+                var user = new User
+                {
+                    Email = adminEmail,
+                    UserName = adminEmail,
+                    Nickname = "Admin"
+                };
+
+                await userManager.CreateAsync(user, adminPassword);
+                await userManager.AddToRoleAsync(user, role.Name);
+
+            })
+                .GetAwaiter()
+                .GetResult();
         }
     }
 }

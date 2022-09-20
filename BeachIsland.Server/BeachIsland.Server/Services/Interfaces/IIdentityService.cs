@@ -5,7 +5,7 @@
 
     public interface IIdentityService
     {
-        string GenerateJwtToken(string userId, string username, string secret);
+        string GenerateJwtToken(string userId, string username, string secret, bool isAdmin);
         ProfileResponseDto GetProfile(string userId);
         Task<bool> UpdateProfile(ProfileUpdateRequestDto profileUpdateRequestDto, string userId);
     }

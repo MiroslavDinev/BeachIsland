@@ -9,7 +9,8 @@
     using BeachIsland.Server.Models.Identity;
     using BeachIsland.Server.Services.Interfaces;
     using BeachIsland.Server.Infrastructure;
-    using System;
+
+    using static WebConstants;
 
     public class IdentityController : ApiController
     {
@@ -62,13 +63,18 @@
                 return Unauthorized();
             }
 
-            var encryptedToken = this.identityService.GenerateJwtToken(user.Id, user.UserName, this.appSettings.Secret);
+            var userRoles =await this.userManager.GetRolesAsync(user);
+
+            var isAdmin = userRoles.Any(x => x == AdministratorRoleName);
+
+            var encryptedToken = this.identityService.GenerateJwtToken(user.Id, user.UserName, this.appSettings.Secret, isAdmin);
 
             return new LoginResponseDto
             {
                 Token = encryptedToken,
                 Username = user.UserName,
-                IsPartner = this.partnerService.isPartner(user.Id)
+                IsPartner = this.partnerService.isPartner(user.Id),
+                IsAdmin = isAdmin,
             };
         }
 

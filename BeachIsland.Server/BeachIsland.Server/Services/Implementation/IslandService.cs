@@ -5,6 +5,7 @@
     using BeachIsland.Server.Data.Models.Islands;
     using BeachIsland.Server.Enums;
     using BeachIsland.Server.Models.Islands;
+    using BeachIsland.Server.Models.Islands.Admin;
     using BeachIsland.Server.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -33,7 +34,7 @@
         public IslandListItemDto[] AllIslands()
         {
             var islands = this.data.Islands
-                .Where(x =>x.IsDeleted == false)
+                .Where(x =>x.IsDeleted == false && x.IsPublic == true)
                 .Select(x => new IslandListItemDto
                 {
                     Id = x.Id,
@@ -61,7 +62,7 @@
         public IslandDetailsDto Details(int id)
         {
             var island = this.data.Islands
-                .Where(x => x.Id == id && x.IsDeleted == false)
+                .Where(x => x.Id == id && x.IsDeleted == false && x.IsPublic == true)
                 .Select(x => new IslandDetailsDto
                 {
                     Id = x.Id,
@@ -158,6 +159,33 @@
             await this.data.SaveChangesAsync();
 
             return true;
+        }
+
+        public IslandAdminListDto[] AllAdminIslands()
+        {
+            var islands = this.data.Islands
+                .Where(x => x.IsDeleted == false)
+                .Select(x => new IslandAdminListDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    IsPublic = x.IsPublic,
+                    FileType = x.FileType,
+                    Description = x.Description,
+                    PartnerName = x.Partner.Name
+                })
+                .ToList();
+
+            foreach (var island in islands)
+            {
+                var bytes = this.imageService.GetImage(island.Id, island.FileType, ImageCategory.Islands);
+
+                var imageBase64String = Convert.ToBase64String(bytes);
+
+                island.ImageUrl = imageBase64String;
+            }
+
+            return islands.ToArray();
         }
     }
 }

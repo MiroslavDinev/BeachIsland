@@ -22,7 +22,7 @@
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             })
-            .AddEntityFrameworkStores<BeachIslandDbContext>();
+                .AddEntityFrameworkStores<BeachIslandDbContext>();
 
             return services;
         }
