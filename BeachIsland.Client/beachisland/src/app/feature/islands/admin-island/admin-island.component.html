@@ -10,8 +10,8 @@
     <tr *ngFor="let adminIsland of adminIslands">
       <td>{{adminIsland.name}}</td>
       <td>{{adminIsland.partnerName}}</td>
-      <td *ngIf="adminIsland.isPublic"><button class="public">Make Private</button></td>
-      <td *ngIf="!adminIsland.isPublic"><button class="public">Make Public</button></td>
+      <td *ngIf="adminIsland.isPublic"><button class="public" (click)="changeStatus(adminIsland.id)">Make Private</button></td>
+      <td *ngIf="!adminIsland.isPublic"><button class="public" (click)="changeStatus(adminIsland.id)">Make Public</button></td>
       <td><a class="details" routerLink="/islands/{{adminIsland.id}}">More Details</a></td>
     </tr>
 </table>
