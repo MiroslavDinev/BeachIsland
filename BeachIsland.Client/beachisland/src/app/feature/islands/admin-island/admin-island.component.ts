@@ -23,4 +23,8 @@ export class AdminIslandComponent implements OnInit {
     })
   }
 
+  changeStatus(id: number){
+    
+  }
+
 }
