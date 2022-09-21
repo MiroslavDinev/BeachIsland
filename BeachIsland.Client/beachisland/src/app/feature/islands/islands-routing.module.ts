@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from "@angular/router";
+import { AdminIslandComponent } from "./admin-island/admin-island.component";
 import { CreateislandComponent } from "./createisland/createisland.component";
 import { EditIslandComponent } from "./edit-island/edit-island.component";
 import { IslandDetailsComponent } from "./island-details/island-details.component";
@@ -20,6 +21,10 @@ const routes: Routes =[
     {
         path: 'islands/:id/update',
         component: EditIslandComponent
+    },
+    {
+        path: 'admin/islands',
+        component: AdminIslandComponent
     }
 ]
 

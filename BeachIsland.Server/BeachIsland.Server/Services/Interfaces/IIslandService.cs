@@ -9,9 +9,9 @@
         IslandAdminListDto[] AllAdminIslands();
         IslandListItemDto[] AllIslands();
         Task<bool> Delete(int id, int partnerId);
-        IslandDetailsDto Details(int id);
+        IslandDetailsDto Details(int id, bool isAdmin);
         RegionsDto[] IslandRegions();
         PopulationSizesDto[] IslandSizes();
-        Task<bool> Update(IslandEditDto islandEditDto, int partnerId);
+        Task<bool> Update(IslandEditDto islandEditDto, int partnerId, bool isAdmin);
     }
 }

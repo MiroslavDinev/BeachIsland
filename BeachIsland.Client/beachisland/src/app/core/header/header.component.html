@@ -11,7 +11,7 @@
                 <div class="dropdown-content">
                   <a routerLink="/islands">Islands</a>
                 </div>
-              </div> 
+            </div> 
         </article>        
         <nav *ngIf="!loggedIn()">
             <ul>
@@ -27,10 +27,18 @@
         </nav>
         <nav *ngIf="loggedIn()">
             <ul>
-                <li class="button-effect" *ngIf="!getPartnerStatus()">
+                <li class="button-effect" *ngIf="!getPartnerStatus() && !getAdminStatus()">
                     <div id="circle"></div>
                     <a routerLink="/partner">Become partner</a>
                 </li>
+                <div class="dropdown" *ngIf="getAdminStatus()">
+                    <button class="dropbtn"> 
+                        Administration <i class="fas fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a routerLink="admin/islands">Islands</a>
+                    </div>
+                </div> 
                 <li class="button-effect">
                     <div id="circle"></div>
                     <a routerLink="/profile">{{getUsername()}}</a>

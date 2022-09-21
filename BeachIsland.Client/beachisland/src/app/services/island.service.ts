@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IIslandAdminItem } from '../feature/interfaces/IIslandAdminItem';
 import { IIslandDetails } from '../feature/interfaces/IIslandDetails';
 import { IIslandItem } from '../feature/interfaces/IIslandItem';
 import { IIslandRegions } from '../feature/interfaces/IIslandRegions';
@@ -18,7 +19,8 @@ export class IslandService {
   private editIslandPath = environment.apiBaseUrl + 'islands/update';
   private getIslandSizesPath = environment.apiBaseUrl + 'islands/islandsizes';
   private getIslandRegionsPath = environment.apiBaseUrl + 'islands/islandregions';
-  private deleteIslandPath = environment.apiBaseUrl + 'islands/delete'
+  private deleteIslandPath = environment.apiBaseUrl + 'islands/delete';
+  private adminIslandsPath = environment.apiBaseUrl + 'admin/allislands';
 
   constructor(private http: HttpClient) { }
 
@@ -48,5 +50,9 @@ export class IslandService {
 
   deleteIsland$(id: any) {
     return this.http.delete(this.deleteIslandPath + '/' + id);
+  }
+
+  getAdminIslands$() :Observable<IIslandAdminItem[]>{
+    return this.http.get<IIslandAdminItem[]>(this.adminIslandsPath);
   }
 }

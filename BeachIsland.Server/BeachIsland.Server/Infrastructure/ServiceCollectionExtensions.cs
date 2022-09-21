@@ -58,7 +58,8 @@
             services
                 .AddTransient<IIdentityService, IdentityService>()
                 .AddTransient<IPartnerService, PartnerService>()
-                .AddTransient<IIslandService, IslandService>();
+                .AddTransient<IIslandService, IslandService>()
+                .AddTransient<IAdminService, AdminService>();
 
             return services;
         }

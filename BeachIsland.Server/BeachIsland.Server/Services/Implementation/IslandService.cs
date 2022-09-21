@@ -59,10 +59,10 @@
             return islands.ToArray();
         }
 
-        public IslandDetailsDto Details(int id)
+        public IslandDetailsDto Details(int id, bool isAdmin)
         {
             var island = this.data.Islands
-                .Where(x => x.Id == id && x.IsDeleted == false && x.IsPublic == true)
+                .Where(x => x.Id == id && x.IsDeleted == false && x.IsPublic == !isAdmin)
                 .Select(x => new IslandDetailsDto
                 {
                     Id = x.Id,
@@ -93,7 +93,7 @@
             return null;
         }
 
-        public async Task<bool> Update(IslandEditDto islandEditDto, int partnerId)
+        public async Task<bool> Update(IslandEditDto islandEditDto, int partnerId, bool isAdmin)
         {
             var island = await this.data.Islands
                 .Where(x => x.Id == islandEditDto.Id && x.PartnerId == partnerId)
@@ -112,6 +112,7 @@
             island.FileType = islandEditDto.FileType;
             island.IslandRegionId = islandEditDto.IslandRegionId;
             island.PopulationSizeId = islandEditDto.PopulationSizeId;
+            island.IsPublic = isAdmin;
 
             await this.data.SaveChangesAsync();
 
@@ -164,7 +165,7 @@
         public IslandAdminListDto[] AllAdminIslands()
         {
             var islands = this.data.Islands
-                .Where(x => x.IsDeleted == false)
+                .Where(x => x.IsDeleted == false && x.IsPublic == false)
                 .Select(x => new IslandAdminListDto
                 {
                     Id = x.Id,

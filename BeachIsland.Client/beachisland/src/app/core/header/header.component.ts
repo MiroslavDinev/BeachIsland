@@ -29,4 +29,7 @@ export class HeaderComponent implements OnInit {
     return this.authService.getPartnerStatus();
   }
 
+  getAdminStatus(){
+    return this.authService.getAdminStatus();
+  }
 }

@@ -47,6 +47,14 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('isPartner')!);
   }
 
+  saveAdminStatus(response :IAuthenticatedResponse){
+    localStorage.setItem('isAdmin', JSON.stringify(response.isAdmin));
+  }
+
+  getAdminStatus(){
+    return JSON.parse(localStorage.getItem('isAdmin')!);
+  }
+
   logout() :void{
     localStorage.removeItem('token');
     localStorage.removeItem('username');

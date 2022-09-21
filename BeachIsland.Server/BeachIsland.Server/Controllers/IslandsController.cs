@@ -15,12 +15,14 @@
         private readonly IIslandService islandService;
         private readonly IPartnerService partnerService;
         private readonly IImageService imageService;
+        private readonly IAdminService adminService;
 
-        public IslandsController(IIslandService islandService, IPartnerService partnerService, IImageService imageService)
+        public IslandsController(IIslandService islandService, IPartnerService partnerService, IImageService imageService, IAdminService adminService)
         {
             this.islandService = islandService;
             this.partnerService = partnerService;
             this.imageService = imageService;
+            this.adminService = adminService;
         }
 
         [Authorize]
@@ -71,7 +73,9 @@
         [HttpGet("Details/{id}")]
         public ActionResult<IslandDetailsDto> Details(int id)
         {
-            var island = this.islandService.Details(id);
+            bool isAdmin = this.adminService.isAdmin(this.User.GetId());
+
+            var island = this.islandService.Details(id, isAdmin);
 
             if(island == null)
             {
@@ -113,7 +117,9 @@
 
             island.FileType = fileType;
 
-            var updated = await this.islandService.Update(island, partnerId);
+            bool isAdmin = this.adminService.isAdmin(this.User.GetId());
+
+            var updated = await this.islandService.Update(island, partnerId, isAdmin);
 
             if (!updated)
             {
