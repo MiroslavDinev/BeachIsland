@@ -1,6 +1,8 @@
+<h2>My Islands</h2>
+
 <article class="container">
     <article class="islands">
-        <article class="island" *ngFor="let island of islands">
+        <article class="island" *ngFor="let island of partnerIslands">
             <article class="island-img">
                 <img src="{{'data:image/*;base64,' + island.imageUrl}}" alt="{{island.name}}">
             </article>
@@ -15,6 +17,10 @@
             </article>
             <article class="buttons">
                 <a class="details" routerLink="/islands/{{island.id}}">More Details</a>
+                <button class="edit" (click)="editIsland(island.id)">Edit</button>
+                <button class="delete" [swal]="{title: 'Are you sure?', text: 'You will not be able to revert this!', icon: 'warning',confirmButtonColor: '#d33' ,showCancelButton: true}" (confirm)="deleteIsland(island.id)" (dismiss)="cancelChanges()">
+                    Delete
+                </button>
             </article>
         </article>
     </article>

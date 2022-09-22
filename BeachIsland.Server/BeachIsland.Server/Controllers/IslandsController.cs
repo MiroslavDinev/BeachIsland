@@ -73,9 +73,7 @@
         [HttpGet("Details/{id}")]
         public ActionResult<IslandDetailsDto> Details(int id)
         {
-            bool isAdmin = this.adminService.isAdmin(this.User.GetId());
-
-            var island = this.islandService.Details(id, isAdmin);
+            var island = this.islandService.Details(id);
 
             if(island == null)
             {
@@ -90,8 +88,9 @@
         public async Task<ActionResult> Update([FromForm] IFormFile file, [FromForm] string details)
         {
             var partnerId = this.partnerService.PartnerId(this.User.GetId());
+            bool isAdmin = this.adminService.isAdmin(this.User.GetId());
 
-            if (partnerId == 0)
+            if (partnerId == 0 && !isAdmin)
             {
                 return Unauthorized();
             }
@@ -116,8 +115,6 @@
             var fileType = GetFileTypeExtension.GetFileType(file);
 
             island.FileType = fileType;
-
-            bool isAdmin = this.adminService.isAdmin(this.User.GetId());
 
             var updated = await this.islandService.Update(island, partnerId, isAdmin);
 
@@ -150,13 +147,14 @@
         public async Task<ActionResult> Delete(int id)
         {
             var partnerId = this.partnerService.PartnerId(this.User.GetId());
+            bool isAdmin = this.adminService.isAdmin(this.User.GetId());
 
-            if (partnerId == 0)
+            if (partnerId == 0 && !isAdmin)
             {
                 return Unauthorized();
             }
 
-            var deleted = await this.islandService.Delete(id, partnerId);
+            var deleted = await this.islandService.Delete(id, partnerId, isAdmin);
 
             if (!deleted)
             {
@@ -164,6 +162,27 @@
             }
 
             return Ok();
+        }
+
+        [Authorize]
+        [HttpGet(nameof(GetPartnerIslands))]
+        public ActionResult<PartnerOwnIslandsDto[]> GetPartnerIslands()
+        {
+            var partnerId = this.partnerService.PartnerId(this.User.GetId());
+
+            if (partnerId == 0)
+            {
+                return Unauthorized();
+            }
+
+            var partnerIslands = this.islandService.GetPartnerIslands(partnerId);
+
+            if (partnerIslands.Any())
+            {
+                return partnerIslands;
+            }
+
+            return NoContent();
         }
     }
 }

@@ -45,6 +45,7 @@
                     Size = x.SizeInSquareKm,
                     FileType = x.FileType
                 })
+                .OrderByDescending(x => x.Id)
                 .ToList();
 
             foreach (var island in islands)
@@ -59,10 +60,10 @@
             return islands.ToArray();
         }
 
-        public IslandDetailsDto Details(int id, bool isAdmin)
+        public IslandDetailsDto Details(int id)
         {
             var island = this.data.Islands
-                .Where(x => x.Id == id && x.IsDeleted == false && x.IsPublic == !isAdmin)
+                .Where(x => x.Id == id && x.IsDeleted == false)
                 .Select(x => new IslandDetailsDto
                 {
                     Id = x.Id,
@@ -75,7 +76,8 @@
                     Name = x.Name,
                     Price = x.Price,
                     Size = x.SizeInSquareKm,
-                    FileType = x.FileType
+                    FileType = x.FileType,
+                    IsPublic = x.IsPublic
                 })
                 .FirstOrDefault();
 
@@ -96,7 +98,7 @@
         public async Task<bool> Update(IslandEditDto islandEditDto, int partnerId, bool isAdmin)
         {
             var island = await this.data.Islands
-                .Where(x => x.Id == islandEditDto.Id && x.PartnerId == partnerId)
+                .Where(x => x.Id == islandEditDto.Id && (x.PartnerId == partnerId || isAdmin))
                 .FirstOrDefaultAsync();
 
             if(island == null)
@@ -145,10 +147,10 @@
             return regions;
         }
 
-        public async Task<bool> Delete(int id, int partnerId)
+        public async Task<bool> Delete(int id, int partnerId, bool isAdmin)
         {
             var island = await this.data.Islands
-                .Where(x => x.Id == id && x.PartnerId == partnerId && x.IsDeleted == false)
+                .Where(x => x.Id == id && x.IsDeleted == false && (x.PartnerId == partnerId || isAdmin))
                 .FirstOrDefaultAsync();
 
             if(island == null)
@@ -175,6 +177,7 @@
                     Description = x.Description,
                     PartnerName = x.Partner.Name
                 })
+                .OrderBy(x => x.Id)
                 .ToList();
 
             foreach (var island in islands)
@@ -187,6 +190,43 @@
             }
 
             return islands.ToArray();
+        }
+
+        public PartnerOwnIslandsDto[] GetPartnerIslands(int partnerId)
+        {
+            var partnerIslands = this.data.Islands
+                .Where(x => x.PartnerId == partnerId && x.IsDeleted == false)
+                .Select(x => new PartnerOwnIslandsDto
+                {
+                    Id = x.Id,
+                    Description = x.Description,
+                    IslandRegionId = x.IslandRegionId,
+                    IslandRegionName = x.IslandRegion.Name,
+                    PopulationSizeId = x.PopulationSizeId,
+                    PopulationSizeName = x.PopulationSize.Name,
+                    Location = x.Location,
+                    Name = x.Name,
+                    Price = x.Price,
+                    Size = x.SizeInSquareKm,
+                    FileType = x.FileType,
+                    IsPublic = x.IsPublic,
+                })
+                .OrderByDescending(x => x.Id)
+                .ToArray();
+
+            if (partnerIslands.Any())
+            {
+                foreach (var island in partnerIslands)
+                {
+                    var bytes = this.imageService.GetImage(island.Id, island.FileType, ImageCategory.Islands);
+
+                    var imageBase64String = Convert.ToBase64String(bytes);
+
+                    island.ImageUrl = imageBase64String;
+                }
+            }
+
+            return partnerIslands;
         }
     }
 }

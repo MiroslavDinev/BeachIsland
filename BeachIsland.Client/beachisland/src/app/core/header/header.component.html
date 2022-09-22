@@ -38,6 +38,14 @@
                     <div class="dropdown-content">
                       <a routerLink="admin/islands">Islands</a>
                     </div>
+                </div>
+                <div class="dropdown" *ngIf="getPartnerStatus()">
+                    <button class="dropbtn"> 
+                        My <i class="fas fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a routerLink="partner/islands">Islands</a>
+                    </div>
                 </div> 
                 <li class="button-effect">
                     <div id="circle"></div>

@@ -23,8 +23,10 @@ export class AdminIslandComponent implements OnInit {
     })
   }
 
-  changeStatus(id: number){
-    
+  changeStatus(id: any){
+    this.islandService.changeIslandStatus$(id).subscribe(res => {
+      this.fetchAdminIslands();
+    })
   }
 
 }

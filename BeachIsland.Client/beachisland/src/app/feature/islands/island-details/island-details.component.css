@@ -20,3 +20,17 @@
 .island-data{
     width: 50%;
 }
+
+.edit{
+    background-color: navajowhite;
+    padding: 10px;
+    color: black;
+    border: 1px solid navajowhite;
+}
+
+.delete{
+    background-color: red;
+    padding: 10px;
+    color: black;
+    border: 1px solid red;
+}

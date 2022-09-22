@@ -4,6 +4,7 @@ import { CreateislandComponent } from "./createisland/createisland.component";
 import { EditIslandComponent } from "./edit-island/edit-island.component";
 import { IslandDetailsComponent } from "./island-details/island-details.component";
 import { ListIslandsComponent } from "./list-islands/list-islands.component";
+import { PartnerIslandsComponent } from "./partner-islands/partner-islands.component";
 
 const routes: Routes =[
     {
@@ -25,6 +26,10 @@ const routes: Routes =[
     {
         path: 'admin/islands',
         component: AdminIslandComponent
+    },
+    {
+        path: 'partner/islands',
+        component: PartnerIslandsComponent
     }
 ]
 

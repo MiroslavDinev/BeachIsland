@@ -27,10 +27,10 @@
             return this.islandService.AllAdminIslands();
         }
 
-        [HttpGet("ChangeStatus/{id}")]
-        public async Task<ActionResult> ChangeStatus(int id)
+        [HttpPost("ChangeIslandStatus/{id}")]
+        public async Task<ActionResult> ChangeIslandStatus(int id)
         {
-            var changed = await this.adminService.ChangeStatus(id);
+            var changed = await this.adminService.ChangeIslandStatus(id);
 
             if (!changed)
             {

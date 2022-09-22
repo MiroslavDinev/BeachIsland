@@ -8,6 +8,7 @@ import { IslandDetailsComponent } from './island-details/island-details.componen
 import { EditIslandComponent } from './edit-island/edit-island.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminIslandComponent } from './admin-island/admin-island.component';
+import { PartnerIslandsComponent } from './partner-islands/partner-islands.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AdminIslandComponent } from './admin-island/admin-island.component';
     ListIslandsComponent,
     IslandDetailsComponent,
     EditIslandComponent,
-    AdminIslandComponent
+    AdminIslandComponent,
+    PartnerIslandsComponent
   ],
   imports: [
     CommonModule,

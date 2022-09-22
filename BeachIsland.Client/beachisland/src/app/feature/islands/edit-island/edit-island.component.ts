@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, mergeMap } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { IslandService } from 'src/app/services/island.service';
 import { IIslandDetails } from '../../interfaces/IIslandDetails';
 import { IIslandRegions } from '../../interfaces/IIslandRegions';
@@ -22,7 +23,7 @@ export class EditIslandComponent implements OnInit {
   islandSizes : IIslandSizes[];
   islandRegions: IIslandRegions[];
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private islandService: IslandService, private router: Router) { 
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private islandService: IslandService, private router: Router, private authService: AuthService) { 
     this.islandForm = this.formBuilder.group({
       'id' : [''],
       name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
@@ -73,7 +74,13 @@ export class EditIslandComponent implements OnInit {
   editIsland(){
     this.formData.append('details', JSON.stringify(this.islandForm.value));
     this.islandService.editIsland$(this.formData).subscribe(res =>{
-      this.router.navigate(['islands']);
+      if(this.getPartnerStatus()){
+        this.router.navigate(['partner/islands']);
+      }
+      else{
+        this.router.navigate(['islands']);
+      }
+      
     })
   }
 
@@ -87,5 +94,9 @@ export class EditIslandComponent implements OnInit {
     this.islandService.getRegions$().subscribe(regions => {
       this.islandRegions = regions;
     })
+  }
+
+  getPartnerStatus(){
+    return this.authService.getPartnerStatus();
   }
 }

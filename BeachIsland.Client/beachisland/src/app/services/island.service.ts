@@ -7,6 +7,7 @@ import { IIslandDetails } from '../feature/interfaces/IIslandDetails';
 import { IIslandItem } from '../feature/interfaces/IIslandItem';
 import { IIslandRegions } from '../feature/interfaces/IIslandRegions';
 import { IIslandSizes } from '../feature/interfaces/IIslandSizes';
+import { IPartnerOwnIslandItem } from '../feature/interfaces/IPartnerOwnIslandItem';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,8 @@ export class IslandService {
   private getIslandRegionsPath = environment.apiBaseUrl + 'islands/islandregions';
   private deleteIslandPath = environment.apiBaseUrl + 'islands/delete';
   private adminIslandsPath = environment.apiBaseUrl + 'admin/allislands';
+  private changeIslandStatusPath = environment.apiBaseUrl + 'admin/changeislandstatus';
+  private partnerIslandsPath = environment.apiBaseUrl + 'islands/getpartnerislands';
 
   constructor(private http: HttpClient) { }
 
@@ -54,5 +57,13 @@ export class IslandService {
 
   getAdminIslands$() :Observable<IIslandAdminItem[]>{
     return this.http.get<IIslandAdminItem[]>(this.adminIslandsPath);
+  }
+
+  changeIslandStatus$(id: any) :Observable<any>{
+    return this.http.post(this.changeIslandStatusPath + '/' + id, {});
+  }
+
+  getPartnerIslands$() :Observable<IPartnerOwnIslandItem[]>{
+    return this.http.get<IPartnerOwnIslandItem[]>(this.partnerIslandsPath);
   }
 }

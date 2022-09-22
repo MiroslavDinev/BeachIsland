@@ -4,7 +4,7 @@
 
     public interface IAdminService
     {
-        Task<bool> ChangeStatus(int islandId);
+        Task<bool> ChangeIslandStatus(int islandId);
         bool isAdmin(string userId);
     }
 }

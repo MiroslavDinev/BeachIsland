@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, mergeMap } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { IslandService } from 'src/app/services/island.service';
+import Swal from 'sweetalert2';
 import { IIslandDetails } from '../../interfaces/IIslandDetails';
 
 @Component({
@@ -13,7 +15,7 @@ export class IslandDetailsComponent implements OnInit {
 
   island: IIslandDetails;
 
-  constructor(private islandService: IslandService, private route: ActivatedRoute) { }
+  constructor(private islandService: IslandService, private route: ActivatedRoute, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchData();
@@ -26,5 +28,34 @@ export class IslandDetailsComponent implements OnInit {
     }), mergeMap(id => this.islandService.getIslandDetails$(id))).subscribe(res =>{
       this.island = res;
     })
+  }
+
+  getAdminStatus(){
+    return this.authService.getAdminStatus();
+  }
+
+  changeStatus(id: any){
+    this.islandService.changeIslandStatus$(id).subscribe(res => {
+      this.router.navigate(['admin/islands']);
+    })
+  }
+
+  editIsland(id: number){
+    this.router.navigate(["islands/" + id + "/update"]);
+  }
+
+  deleteIsland(id: number){
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+    this.islandService.deleteIsland$(id).subscribe(res => {
+      this.router.navigate(['islands']);
+    })
+  }
+
+  cancelChanges(){
+    this.router.navigate(['islands']);
   }
 }

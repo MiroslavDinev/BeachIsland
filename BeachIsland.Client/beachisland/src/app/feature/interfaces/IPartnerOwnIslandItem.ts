@@ -1,4 +1,4 @@
-export interface IIslandDetails{
+export interface IPartnerOwnIslandItem{
     id: number,
     name: string,
     location: string,

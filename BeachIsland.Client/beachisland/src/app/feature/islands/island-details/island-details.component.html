@@ -12,6 +12,14 @@
             <p *ngIf="!island.price">Price upon request</p>
             <p>Region: {{island.islandRegionName}}</p>
             <p>Population: {{island.populationSizeName}}</p>
+            <article class="admin-area" *ngIf="getAdminStatus()">
+                <button class="public" *ngIf="!island.isPublic" (click)="changeStatus(island.id)">Make Public</button>
+                <button class="public" *ngIf="island.isPublic" (click)="changeStatus(island.id)">Make Private</button>
+                <button class="edit" (click)="editIsland(island.id)">Edit</button>
+                <button class="delete" [swal]="{title: 'Are you sure?', text: 'You will not be able to revert this!', icon: 'warning',confirmButtonColor: '#d33' ,showCancelButton: true}" (confirm)="deleteIsland(island.id)" (dismiss)="cancelChanges()">
+                    Delete
+                </button>
+            </article>
         </article>
     </article>
 </article>

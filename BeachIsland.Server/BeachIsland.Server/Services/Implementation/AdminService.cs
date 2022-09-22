@@ -30,7 +30,7 @@
             return isAdmin;
         }
 
-        public async Task<bool> ChangeStatus(int islandId)
+        public async Task<bool> ChangeIslandStatus(int islandId)
         {
             var island = this.data.Islands.Find(islandId);
 

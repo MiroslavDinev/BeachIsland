@@ -8,8 +8,9 @@
         Task<int> AddAsync(IslandAddDto addIslandDto, int partnerId);
         IslandAdminListDto[] AllAdminIslands();
         IslandListItemDto[] AllIslands();
-        Task<bool> Delete(int id, int partnerId);
-        IslandDetailsDto Details(int id, bool isAdmin);
+        Task<bool> Delete(int id, int partnerId, bool isAdmin);
+        IslandDetailsDto Details(int id);
+        PartnerOwnIslandsDto[] GetPartnerIslands(int partnerId);
         RegionsDto[] IslandRegions();
         PopulationSizesDto[] IslandSizes();
         Task<bool> Update(IslandEditDto islandEditDto, int partnerId, bool isAdmin);

@@ -1,6 +1,6 @@
 ﻿namespace BeachIsland.Server.Models.Islands
 {
-    public class IslandDetailsDto
+    public class PartnerOwnIslandsDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
