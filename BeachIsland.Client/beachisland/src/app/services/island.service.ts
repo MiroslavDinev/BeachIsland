@@ -31,8 +31,8 @@ export class IslandService {
     return this.http.post(this.createIslandPath, formData);
   }
 
-  getIslands$() :Observable<IIslandItem[]>{
-    return this.http.get<IIslandItem[]>(this.getIslandsPath);
+  getIslands$(searchValue: string = '') :Observable<IIslandItem[]>{
+    return this.http.get<IIslandItem[]>(this.getIslandsPath + '/' + searchValue);
   }
 
   getIslandDetails$(id: any) :Observable<IIslandDetails>{

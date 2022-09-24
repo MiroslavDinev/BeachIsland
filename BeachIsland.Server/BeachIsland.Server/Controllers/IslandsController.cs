@@ -64,10 +64,10 @@
             return Ok();
         }
 
-        [HttpGet(nameof(All))]
-        public IslandListItemDto[] All()
+        [HttpGet("All/{searchValue?}")]
+        public IslandListItemDto[] All(string? searchValue)
         {
-            return this.islandService.AllIslands();
+            return this.islandService.AllIslands(searchValue);
         }
 
         [HttpGet("Details/{id}")]

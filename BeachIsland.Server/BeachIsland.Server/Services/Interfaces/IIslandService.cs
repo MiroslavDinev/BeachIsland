@@ -7,7 +7,7 @@
     {
         Task<int> AddAsync(IslandAddDto addIslandDto, int partnerId);
         IslandAdminListDto[] AllAdminIslands();
-        IslandListItemDto[] AllIslands();
+        IslandListItemDto[] AllIslands(string searchValue);
         Task<bool> Delete(int id, int partnerId, bool isAdmin);
         IslandDetailsDto Details(int id);
         PartnerOwnIslandsDto[] GetPartnerIslands(int partnerId);

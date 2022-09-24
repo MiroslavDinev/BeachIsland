@@ -27,7 +27,7 @@ import { IslandService } from './services/island.service';
     AppRoutingModule,
     PagesModule,
     AuthModule,
-    IslandsModule
+    IslandsModule,
   ],
   providers: 
   [

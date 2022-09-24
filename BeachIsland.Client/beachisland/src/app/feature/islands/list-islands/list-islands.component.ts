@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { debounceTime, mergeMap, startWith, switchMap } from 'rxjs';
 import { IslandService } from 'src/app/services/island.service';
 import { IIslandItem } from '../../interfaces/IIslandItem';
 
@@ -11,15 +12,19 @@ import { IIslandItem } from '../../interfaces/IIslandItem';
 export class ListIslandsComponent implements OnInit {
 
   islands: IIslandItem[];
-  constructor(private islandService: IslandService, private router: Router) { }
+
+  searchControl= new FormControl();
+
+  constructor(private islandService: IslandService) { }
 
   ngOnInit(): void {
-    this.fetchIslands();
-  }
-
-  fetchIslands(){
-    this.islandService.getIslands$().subscribe(islands =>{
-      this.islands = islands;
-    })
+    this.searchControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      switchMap(searchValue => this.islandService.getIslands$(searchValue))
+      )
+      .subscribe(islands =>{
+        this.islands = islands;
+    });
   }
 }
