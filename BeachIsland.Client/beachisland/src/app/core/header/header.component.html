@@ -32,16 +32,16 @@
                     <a routerLink="/partner">Become partner</a>
                 </li>
                 <div class="dropdown" *ngIf="getAdminStatus()">
-                    <button class="dropbtn"> 
-                        Administration <i class="fas fa-caret-down"></i>
+                    <button class="dropbtn"> <span class="admin">Administration </span>
+                         <i class="fas fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
                       <a routerLink="admin/islands">Islands</a>
                     </div>
                 </div>
                 <div class="dropdown" *ngIf="getPartnerStatus()">
-                    <button class="dropbtn"> 
-                        My <i class="fas fa-caret-down"></i>
+                    <button class="dropbtn my"> <span class="my">My </span>
+                         <i class="fas fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
                       <a routerLink="partner/islands">Islands</a>

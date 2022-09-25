@@ -1,14 +1,14 @@
 @import url("https://use.fontawesome.com/releases/v5.6.3/css/all.css");
 
 .header-content{
-    background-color: aliceblue;
+    background-color: #2D2F30;
 }
 
 header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: aliceblue;
+    background-color: #2D2F30;
     width: 90%;
     margin: auto;
 }
@@ -83,7 +83,7 @@ nav ul li a{
     font-size: 16px;  
     border: none;
     outline: none;
-    color: black;
+    color: white;
     padding: 14px 16px;
     background-color: inherit;
     font-family: inherit;
@@ -92,6 +92,11 @@ nav ul li a{
   
   .navbar a:hover, .dropdown:hover .dropbtn {
     background-color: grey;
+  }
+
+  .dropdown{
+    margin-right: 10px;
+    margin-left: 10px;
   }
   
   .dropdown-content {
@@ -105,7 +110,7 @@ nav ul li a{
   
   .dropdown-content a {
     float: none;
-    color: black;
+    color: grey;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -113,7 +118,8 @@ nav ul li a{
   }
   
   .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: greenyellow;
+    color: white;
   }
   
   .dropdown:hover .dropdown-content {
@@ -122,4 +128,20 @@ nav ul li a{
 
   .fas.fa-bars{
     font-size: 22px;
+  }
+
+  .dropbtn:hover >.fas.fa-bars{
+    color: greenyellow;
+  }
+
+  .dropbtn:hover > .fas.fa-caret-down{
+    color: greenyellow;
+  }
+
+  .dropbtn:hover >.my{
+    color: greenyellow;
+  }
+
+  .dropbtn:hover >.admin{
+    color: greenyellow;
   }

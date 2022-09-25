@@ -6,7 +6,7 @@
 
 <article class="container">
     <article class="islands">
-        <article class="island" *ngFor="let island of islands">
+        <article class="island" *ngFor="let island of islands" routerLink="/islands/{{island.id}}">
             <article class="island-img">
                 <img src="{{'data:image/*;base64,' + island.imageUrl}}" alt="{{island.name}}">
             </article>
@@ -14,10 +14,10 @@
                 <h2>{{island.name}}</h2>
                 <article class="island-text-details">
                     <p>Location: {{island.location}}</p>
-                    <p>{{island.size}} ACRES</p>
+                    <p>Size: {{island.size}} ACRES</p>
                 </article>                
                 <p *ngIf="island.price"> Price: ${{island.price}}</p>
-                <p *ngIf="!island.price"> Price upon request</p>
+                <p *ngIf="!island.price"> Price: Upon request</p>
             </article>
             <article class="buttons">
                 <a class="details" routerLink="/islands/{{island.id}}">More Details</a>
