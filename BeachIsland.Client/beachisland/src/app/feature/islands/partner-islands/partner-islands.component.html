@@ -2,8 +2,8 @@
 
 <article class="container">
     <article class="islands">
-        <article class="island" *ngFor="let island of partnerIslands">
-            <article class="island-img">
+        <article class="island" *ngFor="let island of partnerIslands" routerLink="/islands/{{island.id}}">
+            <article class="island-img animate__animated animate__bounce animate__delay-0.5s">
                 <img src="{{'data:image/*;base64,' + island.imageUrl}}" alt="{{island.name}}">
             </article>
             <article class="island-text">

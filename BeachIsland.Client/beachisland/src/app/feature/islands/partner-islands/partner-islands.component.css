@@ -18,6 +18,11 @@ h2{
     width: 30%;
     background-color: #F4F8FE;
     margin-bottom: 2em;
+    transition: transform .3s;
+}
+
+.island:hover{
+    transform: scale(1.03);
 }
 
 .island-img{

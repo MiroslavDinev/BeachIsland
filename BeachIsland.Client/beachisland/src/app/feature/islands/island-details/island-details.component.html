@@ -6,7 +6,11 @@
         <article class="island-data">
             <h2>{{island.name}}</h2>
             <p>Location: {{island.location}}</p>
-            <p>Description: {{island.description}}</p>
+            <!-- <p>Description: {{island.description}}</p> -->
+            <button (click)="toggleDescription()">Click Me</button>
+                <div id="myDIV">
+                    {{island.description}}
+                </div>
             <p>Size: {{island.size}}</p>
             <p *ngIf="island.price">Price: {{island.price}}</p>
             <p *ngIf="!island.price">Price upon request</p>
