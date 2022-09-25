@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, mergeMap, startWith, switchMap } from 'rxjs';
+import { debounceTime, startWith, switchMap } from 'rxjs';
 import { IslandService } from 'src/app/services/island.service';
 import { IIslandItem } from '../../interfaces/IIslandItem';
 

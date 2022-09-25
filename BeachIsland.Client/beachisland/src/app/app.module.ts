@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,12 +23,13 @@ import { IslandService } from './services/island.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     RouterModule,
     CoreModule.forRoot(),
     AppRoutingModule,
     PagesModule,
     AuthModule,
-    IslandsModule,
+    IslandsModule
   ],
   providers: 
   [
