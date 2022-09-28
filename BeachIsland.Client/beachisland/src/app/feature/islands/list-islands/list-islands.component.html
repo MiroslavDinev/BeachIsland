@@ -2,7 +2,9 @@
 
 <form>
     <input [formControl]="searchControl" type="text" placeholder="Search by name or location"/>
+    <a class="add" *ngIf="isPartner()" routerLink="/islands/add">Add Island</a>
 </form>
+
 
 <article class="container">
     <article class="islands">

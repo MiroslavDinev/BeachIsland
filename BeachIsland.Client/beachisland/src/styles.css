@@ -2,6 +2,8 @@
 
 @import '~animate.css/animate.min';
 
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
 html{
     font-family: 'Roboto', sans-serif;
 }
@@ -17,3 +19,6 @@ body{
     flex-direction: column;
     justify-content: space-between;
   }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

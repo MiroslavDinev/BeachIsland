@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, startWith, switchMap } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { IslandService } from 'src/app/services/island.service';
 import { IIslandItem } from '../../interfaces/IIslandItem';
 
@@ -15,7 +16,7 @@ export class ListIslandsComponent implements OnInit {
 
   searchControl= new FormControl();
 
-  constructor(private islandService: IslandService) { }
+  constructor(private islandService: IslandService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.searchControl.valueChanges.pipe(
@@ -26,5 +27,9 @@ export class ListIslandsComponent implements OnInit {
       .subscribe(islands =>{
         this.islands = islands;
     });
+  }
+
+  isPartner(){
+    return this.authService.getPartnerStatus();
   }
 }

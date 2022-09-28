@@ -10,6 +10,11 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AdminIslandComponent } from './admin-island/admin-island.component';
 import { PartnerIslandsComponent } from './partner-islands/partner-islands.component';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +30,10 @@ import { PartnerIslandsComponent } from './partner-islands/partner-islands.compo
     ReactiveFormsModule,
     IslandsRoutingModule,
     FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatIconModule,
     SweetAlert2Module.forRoot()
   ]
 })
