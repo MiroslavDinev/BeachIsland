@@ -60,11 +60,19 @@ export class IslandDetailsComponent implements OnInit {
   }
 
   toggleDescription() {
-    var x = document.getElementById("myDIV");
-  if (x!.style.display === "none") {
-    x!.style.display = "block";
-  } else {
-    x!.style.display = "none";
-  }
+    var descriptionBtn = document.getElementById("descriptionBtn");
+    var descriptionDiv = document.getElementById("description");
+    if (descriptionDiv!.style.display !== "block") {
+      descriptionDiv!.style.display = "block";
+    } else {
+      descriptionDiv!.style.display = "none";      
+    }
+
+    if(descriptionBtn!.innerHTML == 'More info'){
+      descriptionBtn!.innerHTML = 'Less info';
+    }
+    else if(descriptionBtn!.innerHTML == 'Less info'){
+      descriptionBtn!.innerHTML = 'More info';
+    }
   }
 }

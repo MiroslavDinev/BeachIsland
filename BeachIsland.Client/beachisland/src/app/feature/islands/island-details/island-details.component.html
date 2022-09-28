@@ -6,9 +6,8 @@
         <article class="island-data">
             <h2>{{island.name}}</h2>
             <p>Location: {{island.location}}</p>
-            <!-- <p>Description: {{island.description}}</p> -->
-            <button (click)="toggleDescription()">Click Me</button>
-                <div id="myDIV">
+            <button id="descriptionBtn" (click)="toggleDescription()">More info</button>
+                <div id="description">
                     {{island.description}}
                 </div>
             <p>Size: {{island.size}}</p>
