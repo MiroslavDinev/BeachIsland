@@ -64,7 +64,8 @@
         <label for="price"><b>Price</b></label>
         <input type="number" placeholder="Price in USD" name="price" formControlName="price"/>
 
-        <label for="populationSizeId"><b>Population Size</b></label>
+        <article class="dropdowns">
+            <label for="populationSizeId"><b>Population Size</b></label>
         <select name="populationSizeId" id="populationSizeId"  formControlName="populationSizeId">
             <option *ngFor="let size of islandSizes" value="{{size.id}}">{{size.name}}</option>
           </select>
@@ -85,10 +86,11 @@
                 Island Region Size is required!
             </p>
         </ng-container>
+        </article>       
 
           <label for="file">Choose File</label><br /> <input type="file" id="file" required (change)="uploadFiles($any($event.target).files)">
 
           <button class="cancel" type="button" (click)="cancelChanges()">Cancel</button>
-          <button [disabled]="islandForm.invalid">Submit</button>
+          <button class="submitBtn" [disabled]="islandForm.invalid">Submit</button>
     </div>
 </form>

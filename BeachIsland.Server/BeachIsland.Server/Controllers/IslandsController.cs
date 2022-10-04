@@ -85,7 +85,7 @@
 
         [Authorize]
         [HttpPut(nameof(Update))]
-        public async Task<ActionResult> Update([FromForm] IFormFile file, [FromForm] string details)
+        public async Task<ActionResult> Update([FromForm] IFormFile? file, [FromForm] string details)
         {
             var partnerId = this.partnerService.PartnerId(this.User.GetId());
             bool isAdmin = this.adminService.isAdmin(this.User.GetId());
@@ -95,26 +95,33 @@
                 return Unauthorized();
             }
 
-            bool isValidImage = ImageExtensionHelper.IsValidImageFile(file);
-            bool isValidSize = ImageExtensionHelper.ValidateImageSize(file);
-
-            if (!isValidImage)
-            {
-                throw new ImageNotSupportedFormatException();
-            }
-
-            if (!isValidSize)
-            {
-                throw new ImageSizeExceedException();
-            }
-
             var island = JsonConvert.DeserializeObject<IslandEditDto>(details);
 
-            var fileBytes = file.GetByteFromFileStream();
+            if(file != null)
+            {
+                bool isValidImage = ImageExtensionHelper.IsValidImageFile(file);
+                bool isValidSize = ImageExtensionHelper.ValidateImageSize(file);
 
-            var fileType = GetFileTypeExtension.GetFileType(file);
+                if (!isValidImage)
+                {
+                    throw new ImageNotSupportedFormatException();
+                }
 
-            island.FileType = fileType;
+                if (!isValidSize)
+                {
+                    throw new ImageSizeExceedException();
+                }
+
+                var fileBytes = file.GetByteFromFileStream();
+
+                var fileType = GetFileTypeExtension.GetFileType(file);
+
+                island.FileType = fileType;
+
+                this.imageService.DeleteImages(island.Id, ImageCategory.Islands);
+
+                this.imageService.AddImage(fileBytes, fileType, island.Id, ImageCategory.Islands);
+            }
 
             var updated = await this.islandService.Update(island, partnerId, isAdmin);
 
@@ -122,10 +129,6 @@
             {
                 return BadRequest();
             }
-
-            this.imageService.DeleteImages(island.Id, ImageCategory.Islands);
-
-            this.imageService.AddImage(fileBytes, fileType, island.Id, ImageCategory.Islands);
 
             return Ok();
         }

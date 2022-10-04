@@ -1,58 +1,3 @@
-/* body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
-
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-p.error {
-    text-align: left;
-    border-radius: 0.3em;
-    color: red;
-    padding-top: 0;
-} */
-
-/* Change styles for span and cancel button on extra small screens */
-/* @media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-} */
-
-
-
 .partner {
   position: relative;
   height: 560px;
@@ -62,6 +7,8 @@ p.error {
   background: url(https://c4.wallpaperflare.com/wallpaper/521/500/933/island-landscape-beach-blue-wallpaper-preview.jpg) no-repeat   center center #505050;   
   background-size: cover;
   box-shadow: 0px 30px 60px -5px #000;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 form {

@@ -2,7 +2,7 @@
 
 <form [formGroup]="islandForm" (ngSubmit)="createIsland()">
     <div class="container">
-        <label for="name"><b>Name</b></label>
+        <label for="name"><b>Name</b><span class="req"> *</span></label>
         <input type="text" name="name" formControlName="name"/>
 
         <ng-container *ngIf="islandForm.controls['name'].touched && islandForm.controls['name'].invalid">
@@ -17,7 +17,7 @@
             </p>
         </ng-container>
 
-        <label for="location"><b>Location</b></label>
+        <label for="location"><b>Location</b><span class="req"> *</span></label>
         <input type="text" name="location" formControlName="location"/>
 
         <ng-container *ngIf="islandForm.controls['location'].touched && islandForm.controls['location'].invalid">
@@ -32,7 +32,7 @@
             </p>
         </ng-container>
 
-        <label for="description"><b>Description</b></label>
+        <label for="description"><b>Description</b><span class="req"> *</span></label>
         <textarea name="description" rows="8" formControlName="description"></textarea>
 
         <ng-container *ngIf="islandForm.controls['description'].touched && islandForm.controls['description'].invalid">
@@ -47,7 +47,7 @@
             </p>
         </ng-container>
 
-        <label for="size"><b>Size</b></label>
+        <label for="size"><b>Size</b><span class="req"> *</span></label>
         <input type="number" placeholder="Size in sq. acres" name="size" formControlName="size"/>
 
         <ng-container *ngIf="islandForm.controls['size'].touched && islandForm.controls['size'].invalid">
@@ -83,7 +83,7 @@
         </ng-container>
         </article>
 
-          <label for="file"><b>Choose File</b></label><br /> <input type="file" id="file" required (change)="uploadFiles($any($event.target).files)">
+          <label for="file"><b>Choose File</b><span class="req"> *</span></label><br /> <input type="file" id="file" required (change)="uploadFiles($any($event.target).files)">
 
           <button class="cancel" type="button" (click)="cancelChanges()">Cancel</button>
           <button class="submitBtn" [disabled]="islandForm.invalid">Submit</button>

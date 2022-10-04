@@ -1,3 +1,4 @@
+<h2>Island Details</h2>
 <article class="container">
     <article class="island" *ngIf="island">
         <article class="island-img">
@@ -5,16 +6,24 @@
         </article>
         <article class="island-data">
             <h2>{{island.name}}</h2>
-            <p>Location: {{island.location}}</p>
-            <button id="descriptionBtn" (click)="toggleDescription()">More info</button>
+            <hr>
+            <article class="location-details">
+                <p>Location: {{island.location}}</p>
+                <p>Region: {{island.islandRegionName}}</p>
+                <p>Size: {{island.size}} acres<sup> 2</sup></p>
+            </article>
+            <article class="additional-details">
+                <p *ngIf="island.price">Price: {{island.price}}</p>
+                <p *ngIf="!island.price">Price upon request</p>
+                <p>Population: {{island.populationSizeName}}</p>
+            </article>
+            <article class="description-area">
+                <button id="descriptionBtn" (click)="toggleDescription()">More info</button>
                 <div id="description">
                     {{island.description}}
                 </div>
-            <p>Size: {{island.size}}</p>
-            <p *ngIf="island.price">Price: {{island.price}}</p>
-            <p *ngIf="!island.price">Price upon request</p>
-            <p>Region: {{island.islandRegionName}}</p>
-            <p>Population: {{island.populationSizeName}}</p>
+            </article>
+            
             <article class="admin-area" *ngIf="getAdminStatus()">
                 <button class="public" *ngIf="!island.isPublic" (click)="changeStatus(island.id)">Make Public</button>
                 <button class="public" *ngIf="island.isPublic" (click)="changeStatus(island.id)">Make Private</button>

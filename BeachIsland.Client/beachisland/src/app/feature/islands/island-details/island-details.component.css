@@ -1,12 +1,19 @@
+h2{
+    text-align: center;
+    padding-top: 2%;
+}
+
 .container{
     width: 90%;
     margin:auto;
     background-color: #F4F8FE;
-    margin-top: 5em;
 }
 
 .island{
     display: flex;
+    max-height: 80%;
+    min-height: 60%;
+    margin-top: 6%;
 }
 
 .island-img{
@@ -15,6 +22,26 @@
 
 .island-img img{
     width: 100%;
+}
+
+hr{
+    width: 90%;
+}
+
+.location-details, .additional-details{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+    font-size: 16px;
+}
+
+.description-area{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
 }
 
 .island-data{
@@ -35,6 +62,20 @@
     border: 1px solid red;
 }
 
+#descriptionBtn{
+    background: dodgerblue;
+    color: white;
+    padding: 1em 2em;
+    border: 1px solid dodgerblue;
+    border-radius: 20px;
+}
+
+#descriptionBtn:hover{
+    opacity: 0.8;
+}
+
 #description{
     display: none;
+    text-align: center;
+    padding-top: 1%;
 }

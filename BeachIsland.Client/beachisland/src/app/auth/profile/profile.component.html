@@ -3,8 +3,8 @@
 <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
   <div class="container">
     <ng-container *ngIf="!!userProfile">
-      <p class="readonly">Username: {{ userProfile.username }}</p>
-      <p class="readonly">Email: {{ userProfile.email }}</p>
+      <p class="readonly"><b>Username:</b> {{ userProfile.username }}</p>
+      <p class="readonly"><b>Email:</b> {{ userProfile.email }}</p>
 
       <label for="nickname"><b>Nickname</b></label>
       <input
@@ -64,6 +64,6 @@
     </ng-container>
 
     <button class="cancel" type="button" (click)="cancelChanges()">Cancel</button>
-    <button [disabled]="profileForm.invalid">Submit</button>
+    <button class="submitBtn" [disabled]="profileForm.invalid">Submit</button>
   </div>
 </form>

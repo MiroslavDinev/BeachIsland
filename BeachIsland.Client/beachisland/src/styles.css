@@ -18,7 +18,11 @@ body{
     min-height: 100vh;
     flex-direction: column;
     justify-content: space-between;
-  }
+}
+
+.req{
+    color: red;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

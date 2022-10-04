@@ -7,7 +7,7 @@
     using BeachIsland.Server.Models.Islands;
     using BeachIsland.Server.Models.Islands.Admin;
     using BeachIsland.Server.Services.Interfaces;
-    using Microsoft.AspNetCore.Mvc;
+
     using Microsoft.EntityFrameworkCore;
 
     public class IslandService : IIslandService
@@ -118,10 +118,14 @@
             island.Description = islandEditDto.Description;
             island.Price = islandEditDto.Price;
             island.SizeInSquareKm = islandEditDto.Size;
-            island.FileType = islandEditDto.FileType;
             island.IslandRegionId = islandEditDto.IslandRegionId;
             island.PopulationSizeId = islandEditDto.PopulationSizeId;
             island.IsPublic = isAdmin;
+
+            if(islandEditDto.FileType != null)
+            {
+                island.FileType = islandEditDto.FileType;
+            }           
 
             await this.data.SaveChangesAsync();
 

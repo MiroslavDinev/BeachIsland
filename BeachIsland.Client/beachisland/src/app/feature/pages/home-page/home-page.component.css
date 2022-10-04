@@ -36,6 +36,7 @@
   background-size: 200%;
   background-position: -200%;
   animation: animated-gradient 2s infinite alternate-reverse;
+  padding-bottom: 20px;
   }
 
   @keyframes animated-gradient{

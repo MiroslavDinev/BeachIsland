@@ -15,11 +15,11 @@
             <article class="island-text">
                 <h2>{{island.name}}</h2>
                 <article class="island-text-details">
-                    <p>Location: {{island.location}}</p>
-                    <p>Size: {{island.size}} ACRES</p>
+                    <p><i class="fas fa-map-pin"></i> {{island.location}}</p>
+                    <p *ngIf="island.price"> <i class="fas fa-dollar-sign"></i> ${{island.price}}</p>
+                    <p *ngIf="!island.price"> <i class="fas fa-dollar-sign"></i> Upon request</p>
+                    <p><i class="fas fa-chart-area"></i> {{island.size}} ACRES<sup> 2</sup></p>
                 </article>                
-                <p *ngIf="island.price"> Price: ${{island.price}}</p>
-                <p *ngIf="!island.price"> Price: Upon request</p>
             </article>
             <article class="buttons">
                 <a class="details" routerLink="/islands/{{island.id}}">More Details</a>
