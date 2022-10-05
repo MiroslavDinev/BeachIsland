@@ -51,21 +51,31 @@ hr{
 .edit{
     background-color: navajowhite;
     padding: 10px;
-    color: black;
+    color: white;
     border: 1px solid navajowhite;
+    border-radius: 20px;
 }
 
 .delete{
     background-color: red;
     padding: 10px;
-    color: black;
+    color: white;
     border: 1px solid red;
+    border-radius: 20px;
+}
+
+.public{
+    background-color: greenyellow;
+    padding: 10px;
+    color: white;
+    border: 1px solid greenyellow;
+    border-radius: 20px;
 }
 
 #descriptionBtn{
     background: dodgerblue;
     color: white;
-    padding: 1em 2em;
+    padding: 10px;
     border: 1px solid dodgerblue;
     border-radius: 20px;
 }
@@ -78,4 +88,18 @@ hr{
     display: none;
     text-align: center;
     padding-top: 1%;
+}
+
+.admin-area{
+    width: 90%;
+    margin: auto;
+    display: grid;
+    text-align: center;
+    gap: 5px;
+    margin-bottom: 10px; 
+    margin-top: 10px;   
+}
+
+.admin-area:hover{
+    opacity: 0.8;
 }

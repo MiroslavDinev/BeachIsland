@@ -15,6 +15,7 @@ import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { IslandsModule } from './feature/islands/islands.module';
 import { IslandService } from './services/island.service';
+import { NgxScrollTopModule } from 'ngx-scrolltop';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { IslandService } from './services/island.service';
     AppRoutingModule,
     PagesModule,
     AuthModule,
-    IslandsModule
+    IslandsModule,
+    NgxScrollTopModule
   ],
   providers: 
   [
