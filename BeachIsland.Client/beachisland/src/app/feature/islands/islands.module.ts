@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
+import { PagesModule } from '../pages/pages.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatTableModule,
     MatIconModule,
+    PagesModule,
     SweetAlert2Module.forRoot()
   ]
 })

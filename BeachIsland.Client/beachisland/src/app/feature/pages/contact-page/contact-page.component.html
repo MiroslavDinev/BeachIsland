@@ -1,0 +1,67 @@
+<h2>Contact Us</h2>
+
+<div class="map">
+    <iframe src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJyWUKHhuVpkART3UoseWK49Y&key=AIzaSyAqXBtP-E7cHNDuBJGuMtTR-AJ8D1OjvKE" width="100%" height="650px" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+
+<form [formGroup]="contactForm" (ngSubmit)="contactUs()">
+    <div class="container">
+
+        <label for="name"><b>Name</b><span class="req"> *</span></label>
+        <input type="text" name="name" formControlName="name"/>
+
+        <ng-container *ngIf="contactForm.controls['name'].touched && contactForm.controls['name'].invalid">
+            <p *ngIf="contactForm.controls['name'].errors?.['required']" class="error">
+                Name is required!
+            </p>
+            <p *ngIf="contactForm.controls['name'].errors?.['minlength']" class="error">
+                Name must be at least 2 characters!
+            </p>
+            <p *ngIf="contactForm.controls['name'].errors?.['maxlength']" class="error">
+                Name must be less than 30 characters!
+            </p>
+        </ng-container>
+
+        <label for="email"><b>Email</b><span class="req"> *</span></label>
+        <input type="text" name="email" formControlName="email"/>
+
+        <ng-container *ngIf="contactForm.controls['email'].touched && contactForm.controls['email'].invalid">
+            <p *ngIf="contactForm.controls['email'].errors?.['required']" class="error">
+                Email is required!
+            </p>
+        </ng-container>
+
+        <label for="subject"><b>Subject</b><span class="req"> *</span></label>
+        <input type="text" name="subject" formControlName="subject"/>
+
+        <ng-container *ngIf="contactForm.controls['subject'].touched && contactForm.controls['subject'].invalid">
+            <p *ngIf="contactForm.controls['subject'].errors?.['required']" class="error">
+                Subject is required!
+            </p>
+            <p *ngIf="contactForm.controls['subject'].errors?.['minlength']" class="error">
+                Subject must be at least 3 characters!
+            </p>
+            <p *ngIf="contactForm.controls['subject'].errors?.['maxlength']" class="error">
+                Subject must be less than 30 characters!
+            </p>
+        </ng-container>
+
+        <label for="content"><b>Content</b><span class="req"> *</span></label>
+        <textarea name="content" rows="8" formControlName="content"></textarea>
+
+        <ng-container *ngIf="contactForm.controls['content'].touched && contactForm.controls['content'].invalid">
+            <p *ngIf="contactForm.controls['content'].errors?.['required']" class="error">
+                Content is required!
+            </p>
+            <p *ngIf="contactForm.controls['content'].errors?.['minlength']" class="error">
+                Content must be at least 10 characters!
+            </p>
+            <p *ngIf="contactForm.controls['content'].errors?.['maxlength']" class="error">
+                Content must be less than 3000 characters!
+            </p>
+        </ng-container>
+
+        <button class="cancel" type="button" (click)="cancelChanges()">Cancel</button>
+          <button class="submitBtn" [disabled]="contactForm.invalid">Submit</button>
+    </div>
+</form>

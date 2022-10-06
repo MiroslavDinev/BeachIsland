@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from "@angular/router";
+import { ContactPageComponent } from "../pages/contact-page/contact-page.component";
 import { AdminIslandComponent } from "./admin-island/admin-island.component";
 import { CreateislandComponent } from "./createisland/createisland.component";
 import { EditIslandComponent } from "./edit-island/edit-island.component";
@@ -22,6 +23,10 @@ const routes: Routes =[
     {
         path: 'islands/:id/update',
         component: EditIslandComponent
+    },
+    {
+        path: 'islands/:id/contact/book',
+        component: ContactPageComponent
     },
     {
         path: 'admin/islands',

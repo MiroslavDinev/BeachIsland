@@ -7,6 +7,9 @@ footer{
     margin-bottom: 0px;
     padding-top: 1em;
     padding-bottom: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 p{
@@ -14,7 +17,7 @@ p{
     color: white;
 }
 
-p:hover{
+p:hover, a:hover{
     color: greenyellow;
 }
 

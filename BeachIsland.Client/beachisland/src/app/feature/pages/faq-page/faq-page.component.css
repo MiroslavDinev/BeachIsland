@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+.container{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 2%;
+}
+
+.container h1{
+  color: black;
+  text-align: center;
+  margin-top: 2%;
+}
+
+details{
+  background-color: greenyellow;
+  color: black;
+  font-size: 1.5rem;
+}
+
+details:hover{
+    cursor: pointer;
+}
+
+summary {
+  padding: .5em 1.3rem;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;  
+  transition: height 1s ease;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary:after{
+  content: "\002B";
+}
+
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
+}
+
+details[open] summary:after{
+  content: "\00D7";
+}
+
+details[open] div{
+  padding: .5em 1em;
+  background-color: black;
+  color: white;
+}
+
+p{
+    line-height: 1.4;
+}
+
+ul li{
+    margin-bottom: 10px;
+    line-height: 1.4;
+}

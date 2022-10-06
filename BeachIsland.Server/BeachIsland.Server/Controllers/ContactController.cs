@@ -35,7 +35,7 @@
                 throw new EmailNotSentException(ex.Message);
             }
 
-            return Ok("Email sent successfully");
+            return Ok();
         }
     }
 }

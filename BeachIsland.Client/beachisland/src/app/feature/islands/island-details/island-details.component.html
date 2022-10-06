@@ -24,6 +24,10 @@
                 </div>
             </article>
             
+            <article class="contact-area" *ngIf="!getAdminStatus() && !isPartner()">
+                <a class="contact" routerLink="contact/book">Book</a>
+            </article>            
+
             <article class="admin-area" *ngIf="getAdminStatus()">
                 <button class="public" *ngIf="!island.isPublic" (click)="changeStatus(island.id)">Make Public</button>
                 <button class="public" *ngIf="island.isPublic" (click)="changeStatus(island.id)">Make Private</button>

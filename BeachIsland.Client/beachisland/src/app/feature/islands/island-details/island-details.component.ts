@@ -34,6 +34,10 @@ export class IslandDetailsComponent implements OnInit {
     return this.authService.getAdminStatus();
   }
 
+  isPartner(){
+    return this.authService.getPartnerStatus();
+  }
+
   changeStatus(id: any){
     this.islandService.changeIslandStatus$(id).subscribe(res => {
       this.router.navigate(['admin/islands']);
