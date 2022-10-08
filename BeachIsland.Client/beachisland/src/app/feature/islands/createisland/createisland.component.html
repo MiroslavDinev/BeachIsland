@@ -85,6 +85,8 @@
 
           <label for="file"><b>Choose File</b><span class="req"> *</span></label><br /> <input type="file" id="file" required (change)="uploadFiles($any($event.target).files)">
 
+          <span class="req">File upload required. Please upload image less than 1MB in format jpeg, jpg or png</span>
+
           <button class="cancel" type="button" (click)="cancelChanges()">Cancel</button>
           <button class="submitBtn" [disabled]="islandForm.invalid">Submit</button>
     </div>

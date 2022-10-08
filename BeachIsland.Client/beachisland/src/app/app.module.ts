@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { IslandsModule } from './feature/islands/islands.module';
 import { IslandService } from './services/island.service';
 import { NgxScrollTopModule } from 'ngx-scrolltop';
+import { ErrorInterceptor } from './core/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { NgxScrollTopModule } from 'ngx-scrolltop';
     PagesModule,
     AuthModule,
     IslandsModule,
-    NgxScrollTopModule
+    NgxScrollTopModule,
+    ToastrModule.forRoot()
   ],
   providers: 
   [
@@ -41,7 +44,12 @@ import { NgxScrollTopModule } from 'ngx-scrolltop';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: 
   [

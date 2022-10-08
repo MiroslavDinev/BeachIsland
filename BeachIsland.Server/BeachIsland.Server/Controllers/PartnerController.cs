@@ -28,7 +28,7 @@
             if (userIsPartner)
             {
                 var exception = new Exception("You are already a partner!");
-                return BadRequest(exception);
+                return BadRequest(exception.Message);
             }
 
             await this.partnerService.BecomePartner(partnerRequestDto, userId);

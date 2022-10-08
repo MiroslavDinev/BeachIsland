@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ loginForm: FormGroup = this.formBuilder.group({
   password: new FormControl('',[Validators.required, Validators.minLength(6)])
 });
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +27,7 @@ loginForm: FormGroup = this.formBuilder.group({
       this.authService.saveUsername(data);
       this.authService.savePartnerStatus(data);
       this.authService.saveAdminStatus(data);
+      this.toastrService.info('Logged in successfully');
       this.router.navigate(['/']);
     })
   }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { IslandService } from 'src/app/services/island.service';
 import { IIslandRegions } from '../../interfaces/IIslandRegions';
 import { IIslandSizes } from '../../interfaces/IIslandSizes';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-createisland',
@@ -27,7 +28,7 @@ export class CreateislandComponent implements OnInit {
     islandRegionId: new FormControl('',[Validators.required])
   })
 
-  constructor(private formBuilder: FormBuilder, private islandService: IslandService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private islandService: IslandService, private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getRegions();
@@ -48,16 +49,18 @@ export class CreateislandComponent implements OnInit {
     this.formData.append('details', JSON.stringify(this.islandForm.value));
     this.islandService.createIsland$(this.formData).subscribe({
       next: () =>{
+        this.toastrService.success('Island successfully added. Pending administrator approval.');
         this.router.navigate(['islands']);
       },
       error: (err) =>{
-        console.log(err);
+        this.formData.delete('file');
       }
     }
     )
   }
 
   cancelChanges(){
+    this.toastrService.info('Cancelled');
     this.router.navigate(['/']);
   }
 

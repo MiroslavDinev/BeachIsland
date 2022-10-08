@@ -53,14 +53,14 @@
 
             if(user == null)
             {
-                return Unauthorized();
+                return Unauthorized("Invalid credentials!");
             }
 
             var passwordValid = await this.userManager.CheckPasswordAsync(user, model.Password);
 
             if (!passwordValid)
             {
-                return Unauthorized();
+                return Unauthorized("Invalid credentials!");
             }
 
             var userRoles =await this.userManager.GetRolesAsync(user);

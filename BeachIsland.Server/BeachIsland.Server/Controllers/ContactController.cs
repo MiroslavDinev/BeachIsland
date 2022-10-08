@@ -32,7 +32,8 @@
             }
             catch (SmtpException ex)
             {
-                throw new EmailNotSentException(ex.Message);
+                //throw new EmailNotSentException(ex.Message);
+                return BadRequest(ex.Message.ToString());
             }
 
             return Ok();

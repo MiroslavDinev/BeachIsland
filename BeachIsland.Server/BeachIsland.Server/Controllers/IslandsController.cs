@@ -41,12 +41,16 @@
 
             if (!isValidImage)
             {
-                throw new ImageNotSupportedFormatException();
+                //throw new ImageNotSupportedFormatException();
+                var ex = new ImageNotSupportedFormatException();
+                return BadRequest(ex.Message);
             }
 
             if (!isValidSize)
             {
-                throw new ImageSizeExceedException();
+                //throw new ImageSizeExceedException();
+                var ex = new ImageSizeExceedException();
+                return BadRequest(ex.Message);
             }
 
             var island = JsonConvert.DeserializeObject<IslandAddDto>(details);
@@ -104,12 +108,16 @@
 
                 if (!isValidImage)
                 {
-                    throw new ImageNotSupportedFormatException();
+                    //throw new ImageNotSupportedFormatException();
+                    var ex = new ImageNotSupportedFormatException();
+                    return BadRequest(ex.Message);
                 }
 
                 if (!isValidSize)
                 {
-                    throw new ImageSizeExceedException();
+                    //throw new ImageSizeExceedException();
+                    var ex = new ImageSizeExceedException();
+                    return BadRequest(ex.Message);
                 }
 
                 var fileBytes = file.GetByteFromFileStream();

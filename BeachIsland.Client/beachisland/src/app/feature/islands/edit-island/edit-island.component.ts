@@ -7,6 +7,7 @@ import { IslandService } from 'src/app/services/island.service';
 import { IIslandDetails } from '../../interfaces/IIslandDetails';
 import { IIslandRegions } from '../../interfaces/IIslandRegions';
 import { IIslandSizes } from '../../interfaces/IIslandSizes';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-island',
@@ -23,7 +24,7 @@ export class EditIslandComponent implements OnInit {
   islandSizes : IIslandSizes[];
   islandRegions: IIslandRegions[];
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private islandService: IslandService, private router: Router, private authService: AuthService) { 
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private islandService: IslandService, private router: Router, private authService: AuthService, private toastrService: ToastrService) { 
     this.islandForm = this.formBuilder.group({
       'id' : [''],
       name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
@@ -68,19 +69,26 @@ export class EditIslandComponent implements OnInit {
   }
 
   cancelChanges(){
+    this.toastrService.info('Cancelled');
     this.router.navigate(['islands']);
   }
 
   editIsland(){
     this.formData.append('details', JSON.stringify(this.islandForm.value));
-    this.islandService.editIsland$(this.formData).subscribe(res =>{
-      if(this.getPartnerStatus()){
-        this.router.navigate(['partner/islands']);
-      }
-      else{
-        this.router.navigate(['islands']);
-      }
-      
+    this.islandService.editIsland$(this.formData).subscribe({
+      next: () =>{
+        if(this.getPartnerStatus()){
+          this.toastrService.success('Island successfully edited. Pending administrator approval.');
+          this.router.navigate(['partner/islands']);
+        }
+        else{
+          this.toastrService.success('Island successfully edited.');
+          this.router.navigate(['islands']);
+        }
+      },
+      error: () =>{
+        this.formData.delete('file');
+      }     
     })
   }
 

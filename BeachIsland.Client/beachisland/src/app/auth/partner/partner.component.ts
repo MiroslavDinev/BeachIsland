@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-partner',
@@ -17,7 +18,7 @@ export class PartnerComponent implements OnInit {
     phoneNumber: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)])
   });
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +27,7 @@ export class PartnerComponent implements OnInit {
     this.userService.becomePartner$(this.partnerForm.value).subscribe({
       next: () =>{
         localStorage.setItem('isPartner', JSON.stringify(true));
+        this.toastrService.success('You are now partner');
         this.router.navigate(['/']);
       },
       error: (err) =>{
