@@ -27,8 +27,8 @@ export class EditIslandComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private islandService: IslandService, private router: Router, private authService: AuthService, private toastrService: ToastrService) { 
     this.islandForm = this.formBuilder.group({
       'id' : [''],
-      name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
-      location: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern(/^[A-Za-z\s]*$/)]),
+      location: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[A-Za-z\s]*$/)]),
       description: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(3000)]),
       size: new FormControl('', [Validators.required]),
       price : new FormControl(''),

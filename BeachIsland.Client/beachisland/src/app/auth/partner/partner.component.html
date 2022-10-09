@@ -38,6 +38,9 @@
         <p *ngIf="partnerForm.controls['phoneNumber'].errors?.['maxlength']" class="error">
             Phone Number must be less than 20 characters!
         </p>
+        <p *ngIf="partnerForm.controls['phoneNumber'].errors?.['pattern']" class="error">
+          Valid formats are: 0888123456 or +359888123456!
+      </p>
     </ng-container>
 
       <br>

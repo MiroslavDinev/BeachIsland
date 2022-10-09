@@ -140,7 +140,7 @@
 
             if (!updated)
             {
-                return BadRequest();
+                return Unauthorized("Unsufficient user privileges!");
             }
 
             return Ok();

@@ -15,7 +15,7 @@ export class PartnerComponent implements OnInit {
 
   partnerForm: FormGroup = this.formBuilder.group({
     name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
-    phoneNumber: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)])
+    phoneNumber: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern(/^((\+359?)|0)?[0-9]{9}$/)])
   });
 
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router, private toastrService: ToastrService) { }

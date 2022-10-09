@@ -15,6 +15,9 @@
             <p *ngIf="islandForm.controls['name'].errors?.['maxlength']" class="error">
                 Name must be less than 30 characters!
             </p>
+            <p *ngIf="islandForm.controls['name'].errors?.['pattern']" class="error">
+                Valid name consists only of letters and spaces!
+            </p>
         </ng-container>
 
         <label for="location"><b>Location</b><span class="req"> *</span></label>
@@ -29,6 +32,9 @@
             </p>
             <p *ngIf="islandForm.controls['location'].errors?.['maxlength']" class="error">
                 Location must be less than 50 characters!
+            </p>
+            <p *ngIf="islandForm.controls['location'].errors?.['pattern']" class="error">
+                Valid location consists only of letters and spaces!
             </p>
         </ng-container>
 

@@ -27,6 +27,9 @@
         <p *ngIf="registerForm.controls['email'].errors?.['required']" class="error">
             Email is required!
         </p>
+        <p *ngIf="registerForm.controls['email'].errors?.['email']" class="error">
+          Invalid email format!
+      </p>
     </ng-container>
 
     <br>

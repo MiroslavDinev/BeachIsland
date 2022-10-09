@@ -1,5 +1,7 @@
 import { RouterModule, Routes } from "@angular/router";
+import { AdminGuard } from "src/app/core/guards/admin.guard";
 import { AuthGuard } from "src/app/core/guards/auth.guard";
+import { EditGuard } from "src/app/core/guards/edit.guard";
 import { PartnerGuard } from "src/app/core/guards/partner.guard";
 import { ContactPageComponent } from "../pages/contact-page/contact-page.component";
 import { AdminIslandComponent } from "./admin-island/admin-island.component";
@@ -26,7 +28,7 @@ const routes: Routes =[
     {
         path: 'islands/:id/update',
         component: EditIslandComponent,
-        canActivate: [AuthGuard]
+        canActivate: [EditGuard]
     },
     {
         path: 'islands/:id/contact/book',
@@ -35,7 +37,8 @@ const routes: Routes =[
     },
     {
         path: 'admin/islands',
-        component: AdminIslandComponent
+        component: AdminIslandComponent,
+        canActivate: [AdminGuard]
     },
     {
         path: 'partner/islands',

@@ -21,8 +21,8 @@ export class CreateislandComponent implements OnInit {
   islandRegions: IIslandRegions[];
 
   islandForm: FormGroup = this.formBuilder.group({
-    name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]),
-    location: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern(/^[A-Za-z\s]*$/)]),
+    location: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[A-Za-z\s]*$/)]),
     description: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(3000)]),
     size: new FormControl('', [Validators.required]),
     price : new FormControl(''),
