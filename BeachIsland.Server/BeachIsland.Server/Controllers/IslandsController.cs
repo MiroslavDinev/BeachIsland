@@ -36,6 +36,11 @@
                 return Unauthorized();
             }
 
+            if(file == null)
+            {
+                return BadRequest("Cannot create island without valid file");
+            }
+
             bool isValidImage = ImageExtensionHelper.IsValidImageFile(file);
             bool isValidSize = ImageExtensionHelper.ValidateImageSize(file);
 
@@ -81,7 +86,7 @@
 
             if(island == null)
             {
-                return NotFound();
+                return NotFound("No such island exists");
             }
 
             return island;
@@ -96,7 +101,7 @@
 
             if (partnerId == 0 && !isAdmin)
             {
-                return Unauthorized();
+                return Unauthorized("Unsufficient user privileges!");
             }
 
             var island = JsonConvert.DeserializeObject<IslandEditDto>(details);

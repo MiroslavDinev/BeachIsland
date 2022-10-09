@@ -66,7 +66,6 @@ export class AuthService {
     if(this.getToken()){
       return true;
     }
-
     return false;
   }
 }

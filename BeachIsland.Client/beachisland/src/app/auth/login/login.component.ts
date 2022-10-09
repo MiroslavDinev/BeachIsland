@@ -31,4 +31,8 @@ loginForm: FormGroup = this.formBuilder.group({
       this.router.navigate(['/']);
     })
   }
+
+  isLoggedIn(){
+    return this.authService.isAuthenticated();
+  }
 }

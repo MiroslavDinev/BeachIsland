@@ -1,4 +1,5 @@
-<div class="login">
+<div *ngIf="!isLoggedIn()">
+  <div class="login">
     <h2 class="active"> log in </h2>
   
     <h2 class="nonactive" routerLink="/register"> register </h2>
@@ -44,3 +45,10 @@
     </form>
   
   </div>
+</div>
+
+
+<div class="return" *ngIf="isLoggedIn()">
+  <h2>You are already logged in!</h2>
+  <a routerLink="/home">Home</a>
+</div>

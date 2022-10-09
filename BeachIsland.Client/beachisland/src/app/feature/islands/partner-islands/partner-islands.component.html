@@ -1,13 +1,14 @@
 <h2>My Islands</h2>
 
-<article class="container">
+<article *ngIf="partnerIslands" class="container">
     <article class="islands">
         <article class="island" *ngFor="let island of partnerIslands" routerLink="/islands/{{island.id}}">
             <article class="island-img animate__animated animate__bounce animate__delay-0.5s">
                 <img src="{{'data:image/*;base64,' + island.imageUrl}}" alt="{{island.name}}">
             </article>
             <article class="island-text">
-                <h2>{{island.name}}</h2>
+                <h2 *ngIf="island.isPublic">{{island.name}} (Public)</h2>
+                <h2 *ngIf="!island.isPublic">{{island.name}} (Not public)</h2>
                 <article class="island-text-details">
                     <p><i class="fas fa-map-pin"></i> {{island.location}}</p>
                     <p *ngIf="island.price"> <i class="fas fa-dollar-sign"></i> ${{island.price}}</p>
@@ -23,5 +24,12 @@
                 </button>
             </article>
         </article>
+    </article>
+</article>
+
+<article *ngIf="!partnerIslands" class="no-island">
+    <p>No islands found!</p>
+    <article class="no-island-img">
+        <img src="../../../../assets/Missing.jpg" alt="NoIsland">
     </article>
 </article>

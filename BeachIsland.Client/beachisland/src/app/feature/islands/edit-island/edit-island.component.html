@@ -88,7 +88,7 @@
         </ng-container>
         </article>       
 
-          <label for="file">Choose File</label><br /> <input type="file" id="file" required (change)="uploadFiles($any($event.target).files)">
+          <label for="file">Choose File</label><br /> <input type="file" id="file" accept="image/*" (change)="uploadFiles($any($event.target).files)">
 
           <span class="req">File upload for edit not required. If changing the current image please upload file less than 1MB in format jpeg, jpg or png</span>
 

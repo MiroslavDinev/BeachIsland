@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IslandService } from 'src/app/services/island.service';
@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./createisland.component.css']
 })
 export class CreateislandComponent implements OnInit {
+
+  @ViewChild('fileUploader') fileUploader:ElementRef;
 
   public formData = new FormData();
 
@@ -47,13 +49,19 @@ export class CreateislandComponent implements OnInit {
 
   createIsland() {
     this.formData.append('details', JSON.stringify(this.islandForm.value));
+    if(this.formData.get('file')==null){
+      this.toastrService.info('File required');
+      return;
+    }
     this.islandService.createIsland$(this.formData).subscribe({
       next: () =>{
         this.toastrService.success('Island successfully added. Pending administrator approval.');
         this.router.navigate(['islands']);
       },
       error: (err) =>{
+        this.fileUploader.nativeElement.value = null;
         this.formData.delete('file');
+        this.toastrService.info('Valid size and format file is required');
       }
     }
     )

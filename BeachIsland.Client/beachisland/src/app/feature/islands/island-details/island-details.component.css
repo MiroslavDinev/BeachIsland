@@ -120,3 +120,26 @@ hr{
     display: block;
     text-align: center;
 }
+
+.no-island{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+}
+
+.no-island p{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 20px;
+}
+
+.no-island-img
+{
+    margin-bottom: 2%;
+}
+.no-island-img img{
+    width: 100%;
+}

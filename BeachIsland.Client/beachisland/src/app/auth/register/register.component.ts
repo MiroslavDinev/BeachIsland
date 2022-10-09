@@ -51,11 +51,12 @@ export class RegisterComponent implements OnInit {
       next: () =>{
         this.toastrService.success('Registration success. Please login');
         this.router.navigate(['login']);
-      },
-      error: (err) =>{
-        console.error(err.error[0].description);
       }
     })
+  }
+
+  isLoggedIn(){
+    return this.authService.isAuthenticated();
   }
 }
 
