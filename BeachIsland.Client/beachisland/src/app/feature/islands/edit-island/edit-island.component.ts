@@ -27,13 +27,13 @@ export class EditIslandComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private islandService: IslandService, private router: Router, private authService: AuthService, private toastrService: ToastrService) { 
     this.islandForm = this.formBuilder.group({
       'id' : [''],
-      name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern(/^[A-Za-z\s]*$/)]),
-      location: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[A-Za-z\s]*$/)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(3000)]),
-      size: new FormControl('', [Validators.required]),
+      name: new FormControl(''),
+      location: new FormControl(''),
+      description: new FormControl(''),
+      size: new FormControl(''),
       price : new FormControl(''),
-      populationSizeId: new FormControl('',[Validators.required]),
-      islandRegionId: new FormControl('',[Validators.required])
+      populationSizeId: new FormControl(''),
+      islandRegionId: new FormControl('')
     })
   }
 
@@ -51,13 +51,13 @@ export class EditIslandComponent implements OnInit {
       this.island = res;
         this.islandForm = this.formBuilder.group({
           'id' : [this.island.id],
-          name: [this.island.name],
-          location: [this.island.location],
-          description: [this.island.description],
-          size: [this.island.size],
+          name: [this.island.name, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern(/^[A-Za-z\s]*$/)]],
+          location: [this.island.location, [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[A-Za-z\s]*$/)]],
+          description: [this.island.description, [Validators.required, Validators.minLength(10), Validators.maxLength(3000)]],
+          size: [this.island.size, [Validators.required]],
           price : [this.island.price],
-          populationSizeId: [this.island.populationSizeId],
-          islandRegionId: [this.island.islandRegionId]
+          populationSizeId: [this.island.populationSizeId, [Validators.required]],
+          islandRegionId: [this.island.islandRegionId, [Validators.required]]
     })
   })
   }

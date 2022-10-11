@@ -111,3 +111,21 @@ form a:hover{
     width: 80%;
     margin: auto;
 }
+
+.paging ::ng-deep .ngx-pagination .current{
+    background: greenyellow;
+}
+
+.paging{
+    text-align: center;
+}
+
+.loading{
+    width: 20%;
+    margin: auto;
+    margin-top: 5%;
+}
+
+.mat-spinner ::ng-deep circle {
+        stroke: greenyellow;
+}

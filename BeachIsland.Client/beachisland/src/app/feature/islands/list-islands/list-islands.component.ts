@@ -13,6 +13,7 @@ import { IIslandItem } from '../../interfaces/IIslandItem';
 export class ListIslandsComponent implements OnInit {
 
   islands: IIslandItem[];
+  p: number = 1;
 
   searchControl= new FormControl();
 

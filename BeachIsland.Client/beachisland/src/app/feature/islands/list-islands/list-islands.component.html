@@ -1,14 +1,15 @@
 <h2>All Islands</h2>
 
-<form>
+<form *ngIf="islands">
     <input [formControl]="searchControl" type="text" placeholder="Search by name or location"/>
     <a class="add" *ngIf="isPartner()" routerLink="/islands/add">Add Island</a>
 </form>
 
+<mat-spinner class="loading" *ngIf="!islands"></mat-spinner>
 
-<article class="container">
+<article *ngIf="islands" class="container">
     <article class="islands">
-        <article class="island" *ngFor="let island of islands" routerLink="/islands/{{island.id}}">
+        <article class="island" *ngFor="let island of islands | paginate: { itemsPerPage: 9, currentPage: p }" routerLink="/islands/{{island.id}}">
             <article class="island-img  animate__animated animate__bounce animate__delay-0.5s">
                 <img src="{{'data:image/*;base64,' + island.imageUrl}}" alt="{{island.name}}">
             </article>
@@ -26,4 +27,5 @@
             </article>
         </article>
     </article>
+    <pagination-controls *ngIf="islands.length!=0" class="paging" (pageChange)="p = $event"></pagination-controls>
 </article>

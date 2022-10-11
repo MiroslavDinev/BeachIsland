@@ -51,3 +51,30 @@ h2{
     padding-left: 30%;
     padding-right: 30%;
 }
+
+.no-islands{
+  text-align: center;
+  margin-top: 5%;
+  font-size: 20px;
+}
+
+.mail{
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.check-mail{
+  text-decoration: none;
+  background-color: #BFC0C0;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.check-mail:hover{
+  text-decoration: none;
+  background-color: greenyellow;
+  color: black;
+}

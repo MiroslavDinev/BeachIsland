@@ -15,6 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { PagesModule } from '../pages/pages.module';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { PagesModule } from '../pages/pages.module';
     MatTableModule,
     MatIconModule,
     PagesModule,
+    NgxPaginationModule,
+    MatProgressSpinnerModule,
     SweetAlert2Module.forRoot()
   ]
 })
