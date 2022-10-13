@@ -13,6 +13,11 @@ form{
     margin: auto;
 }
 
+form input{
+    border: 1px solid grey;
+    border-radius:10px;
+}
+
 form input::placeholder{
     text-align: center;
 }
@@ -54,6 +59,7 @@ form a:hover{
     background-color: #F4F8FE;
     margin-bottom: 2em;
     transition: transform .3s;
+    box-shadow: 9px -4px 20px 0px #898b88;
 }
 
 .island:hover{

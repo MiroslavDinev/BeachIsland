@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserService } from './user.service';
+import { UserService } from '../services/user.service';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';

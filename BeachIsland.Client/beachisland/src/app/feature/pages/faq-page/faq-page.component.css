@@ -16,6 +16,8 @@ details{
   background-color: greenyellow;
   color: black;
   font-size: 1.5rem;
+  border-radius:10px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
 
 details:hover{
@@ -51,6 +53,8 @@ details[open] div{
   padding: .5em 1em;
   background-color: black;
   color: white;
+  border-bottom-left-radius:10px;
+  border-bottom-right-radius:10px;
 }
 
 p{

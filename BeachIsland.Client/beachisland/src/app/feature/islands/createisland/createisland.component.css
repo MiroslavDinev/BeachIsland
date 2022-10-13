@@ -19,6 +19,8 @@ input, textarea, .readonly {
   box-sizing: border-box;
   max-width: 100%;
   min-width: 100%;
+  border-radius:10px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
 
 form input:focus::placeholder {
@@ -31,6 +33,11 @@ form input:focus::placeholder {
   margin-top: 20px;
   margin-bottom: 20px;
   gap: 20px;
+}
+
+select {
+  border-radius:10px;
+  padding: 10px;
 }
 
 .submitBtn {
