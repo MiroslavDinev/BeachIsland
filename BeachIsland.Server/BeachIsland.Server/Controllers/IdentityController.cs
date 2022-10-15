@@ -43,7 +43,7 @@
                 return Ok();
             }
 
-            return BadRequest(result.Errors);
+            return BadRequest(result.Errors?.FirstOrDefault().Description);
         }
 
         [HttpPost(nameof(Login))]

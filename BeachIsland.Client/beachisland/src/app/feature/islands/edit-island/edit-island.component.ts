@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, mergeMap } from 'rxjs';
@@ -15,6 +15,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./edit-island.component.css']
 })
 export class EditIslandComponent implements OnInit {
+
+  @ViewChild('fileUploader') fileUploader:ElementRef;
 
   public formData = new FormData();
 
@@ -87,6 +89,7 @@ export class EditIslandComponent implements OnInit {
         }
       },
       error: () =>{
+        this.fileUploader.nativeElement.value = null;
         this.formData.delete('file');
       }     
     })

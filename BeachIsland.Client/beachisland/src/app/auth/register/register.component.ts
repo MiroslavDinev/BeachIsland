@@ -51,6 +51,9 @@ export class RegisterComponent implements OnInit {
       next: () =>{
         this.toastrService.success('Registration success. Please login');
         this.router.navigate(['login']);
+      },
+      error: () =>{
+        this.toastrService.error('Something went wrong, please try again later');
       }
     })
   }
