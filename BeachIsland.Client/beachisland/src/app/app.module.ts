@@ -18,6 +18,7 @@ import { IslandsModule } from './feature/islands/islands.module';
 import { IslandService } from './services/island.service';
 import { NgxScrollTopModule } from 'ngx-scrolltop';
 import { ErrorInterceptor } from './core/error.interceptor';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ErrorInterceptor } from './core/error.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule,
-    CoreModule.forRoot(),
+    CoreModule,
     AppRoutingModule,
     PagesModule,
     AuthModule,
@@ -40,6 +41,7 @@ import { ErrorInterceptor } from './core/error.interceptor';
   [
     AuthService,
     IslandService,
+    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
